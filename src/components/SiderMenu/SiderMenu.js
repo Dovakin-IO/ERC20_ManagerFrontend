@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import { Layout } from 'antd';
-import pathToRegexp from 'path-to-regexp';
-import classNames from 'classnames';
-import Link from 'umi/link';
-import styles from './index.less';
-import BaseMenu, { getMenuMatches } from './BaseMenu';
-import { urlToList } from '../_utils/pathTools';
-
+import React, { PureComponent } from "react";
+import { Layout } from "antd";
+import pathToRegexp from "path-to-regexp";
+import classNames from "classnames";
+import Link from "umi/link";
+import styles from "./index.less";
+import BaseMenu, { getMenuMatches } from "./BaseMenu";
+import { urlToList } from "../_utils/pathTools";
+import cpctLogo from "../../assets/cpct_log.svg";
 const { Sider } = Layout;
 
 /**
@@ -16,7 +16,7 @@ const { Sider } = Layout;
 const getDefaultCollapsedSubMenus = props => {
   const {
     location: { pathname },
-    flatMenuKeys,
+    flatMenuKeys
   } = props;
   return urlToList(pathname)
     .map(item => getMenuMatches(flatMenuKeys, item)[0])
@@ -45,7 +45,9 @@ export const getFlatMenuKeys = menu =>
 export const getMenuMatchKeys = (flatMenuKeys, paths) =>
   paths.reduce(
     (matchKeys, path) =>
-      matchKeys.concat(flatMenuKeys.filter(item => pathToRegexp(item).test(path))),
+      matchKeys.concat(
+        flatMenuKeys.filter(item => pathToRegexp(item).test(path))
+      ),
     []
   );
 
@@ -54,7 +56,7 @@ export default class SiderMenu extends PureComponent {
     super(props);
     this.flatMenuKeys = getFlatMenuKeys(props.menuData);
     this.state = {
-      openKeys: getDefaultCollapsedSubMenus(props),
+      openKeys: getDefaultCollapsedSubMenus(props)
     };
   }
 
@@ -63,7 +65,7 @@ export default class SiderMenu extends PureComponent {
     if (props.location.pathname !== pathname) {
       return {
         pathname: props.location.pathname,
-        openKeys: getDefaultCollapsedSubMenus(props),
+        openKeys: getDefaultCollapsedSubMenus(props)
       };
     }
     return null;
@@ -80,9 +82,10 @@ export default class SiderMenu extends PureComponent {
   };
 
   handleOpenChange = openKeys => {
-    const moreThanOne = openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
+    const moreThanOne =
+      openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
     this.setState({
-      openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys],
+      openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys]
     });
   };
 
@@ -93,7 +96,7 @@ export default class SiderMenu extends PureComponent {
 
     const siderClassName = classNames(styles.sider, {
       [styles.fixSiderbar]: fixSiderbar,
-      [styles.light]: theme === 'light',
+      [styles.light]: theme === "light"
     });
 
     return (
@@ -109,8 +112,7 @@ export default class SiderMenu extends PureComponent {
       >
         <div className={styles.logo} id="logo">
           <Link to="/">
-            <img src={logo} alt="logo" />
-            <h1>CPCT</h1>
+            <img src={cpctLogo} alt="logo" />
           </Link>
         </div>
         <BaseMenu
@@ -118,7 +120,7 @@ export default class SiderMenu extends PureComponent {
           mode="inline"
           handleOpenChange={this.handleOpenChange}
           onOpenChange={this.handleOpenChange}
-          style={{ padding: '16px 0', width: '100%', overflowX: 'hidden' }}
+          style={{ padding: "16px 0", width: "100%", overflowX: "hidden" }}
           {...defaultProps}
         />
       </Sider>
