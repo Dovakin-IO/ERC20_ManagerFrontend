@@ -1,4 +1,4 @@
-import { queryTransactions } from '@/services/serverapi';
+import { queryTransactions, exportVoucherPDF } from '@/services/serverapi';
 import { stat } from 'fs';
 
 export default {
@@ -17,6 +17,12 @@ export default {
                 type: 'save',
                 payload: response,
             })
+        },
+        *export({ payload }, { call, put }) {
+            const response = yield call(exportVoucherPDF, payload);
+            if(response) {
+                window.open("http://localhost:8083/" + response.uri);
+            }
         }
     },
 

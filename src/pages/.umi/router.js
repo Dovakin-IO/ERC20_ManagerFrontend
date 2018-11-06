@@ -54,6 +54,7 @@ let routes = [
         "path": "/dashboard",
         "name": "dashboard",
         "icon": "dashboard",
+        "hideInMenu": "true",
         "routes": [
           {
             "path": "/dashboard/analysis",
@@ -183,7 +184,6 @@ let routes = [
         "path": "/list",
         "icon": "table",
         "name": "list",
-        "hideInMenu": "true",
         "routes": [
           {
             "path": "/list/table-list",

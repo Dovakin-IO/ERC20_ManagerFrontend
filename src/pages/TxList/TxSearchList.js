@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "dva";
 import { routerRedux } from "dva/router";
-import { Card, Form, Row, Col, Input, Table, Button, DatePicker } from "antd";
+import { Card, Form, Row, Col, Input, Table, Button, DatePicker, Alert } from "antd";
 import PageHeaderWrapper from "@/components/PageHeaderWrapper";
 import StandardTable from "@/components/StandardTable";
 
@@ -294,13 +294,33 @@ class TxSearchList extends PureComponent {
   render() {
     const {
       tx: { data, pagination },
-      loading
+      loading,
+      dispatch,
     } = this.props;
     return (
       <PageHeaderWrapper title="转账记录">
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
+            <Button onClick={() => {
+              dispatch({
+                type: 'tx/export',
+                payload: {
+                  settlement_account_name: 'qflcx9877',
+                }
+              })
+            }} >
+            导出
+            </Button>
+            <Alert style={{ marginBottom: 10 }} 
+                message={
+                 typeof(pagination.total) == "undefined"?
+                 "查询结果总计: 0 条"
+                 : "查询结果总计: " + pagination.total
+                  + " 条"} 
+                type="info" 
+                showIcon
+                />
             <Table
               loading={loading}
               dataSource={data}
