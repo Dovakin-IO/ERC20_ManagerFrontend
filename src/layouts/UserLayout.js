@@ -5,7 +5,7 @@ import { Icon } from 'antd';
 import GlobalFooter from '@/components/GlobalFooter';
 import SelectLang from '@/components/SelectLang';
 import styles from './UserLayout.less';
-import logo from '../assets/cpct_log.png';
+import logo from '../assets/cpct_logo.png';
 
 const links = [
   {
@@ -27,7 +27,7 @@ const links = [
 
 const copyright = (
   <Fragment>
-    Copyright <Icon type="copyright" /> 2018 CPCT生态基金出品
+    Copyright <Icon type="copyright" /> 2018 CPCT FOUNDATION LTD.
   </Fragment>
 );
 

@@ -102,7 +102,7 @@ class TxUserDetail extends Component {
         {user.cpct_address == null ? (
           <div />
         ) : (
-          <Button type="danger" size="small" ghost onClick={this.toggle}>
+          <Button style={{ marginLeft: 10}} type="danger" size="small" ghost onClick={this.toggle}>
             修改地址
           </Button>
         )}
@@ -120,11 +120,11 @@ class TxUserDetail extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      isModifyAddress: nextProps.txuser.isModifyAddress
-    });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     isModifyAddress: nextProps.txuser.isModifyAddress
+  //   });
+  // }
 
   // componentWillUpdate() {
   //     // const { txuser, dispatch } = this.props;
@@ -177,12 +177,24 @@ class TxUserDetail extends Component {
       loading,
       txuser,
       dispatch,
-      form: { getFieldDecorator }
+      form: { getFieldDecorator },
     } = this.props;
     const { isModifyAddress } = this.state;
     const { user, list } = txuser;
     const action = (
       <Fragment>
+        {
+          user.cpct_address == null?
+          <Button type="primary" disabled >导出电子凭证</Button> 
+          : <Button type="primary" onClick={() => {
+            dispatch({
+              type: 'txuser/export',
+              payload: {
+                settlement_account_name: user.settlement_account_name,
+              }
+            })
+          }} >导出电子凭证</Button>
+        }
         <Search
           placeholder="输入用户编号查询"
           style={{ width: 200, marginRight: 10 }}

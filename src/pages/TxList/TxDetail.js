@@ -97,10 +97,10 @@ class TxDetail extends PureComponent {
               交易数量: {txInfo.value.substring(0, txInfo.value.length - 18)}
             </Timeline.Item>
             <Timeline.Item color="green">
-              gas limit: {txInfo.gasLimit + " wei"}
+              gas limit: {txInfo.gasLimit}
             </Timeline.Item>
             <Timeline.Item color="green">
-              gas price: {txInfo.gasPrice + " wei"}
+              gas price: {txInfo.gasPrice}
             </Timeline.Item>
             <Timeline.Item color="green">
               gas used: {txInfo.gasUsed + " wei"}

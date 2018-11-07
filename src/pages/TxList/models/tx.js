@@ -17,12 +17,6 @@ export default {
                 type: 'save',
                 payload: response,
             })
-        },
-        *export({ payload }, { call, put }) {
-            const response = yield call(exportVoucherPDF, payload);
-            if(response) {
-                window.open("http://localhost:8083/" + response.uri);
-            }
         }
     },
 

@@ -184,6 +184,7 @@ let routes = [
         "path": "/list",
         "icon": "table",
         "name": "list",
+        "hideInMenu": "true",
         "routes": [
           {
             "path": "/list/table-list",

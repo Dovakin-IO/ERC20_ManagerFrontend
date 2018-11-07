@@ -302,16 +302,6 @@ class TxSearchList extends PureComponent {
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
-            <Button onClick={() => {
-              dispatch({
-                type: 'tx/export',
-                payload: {
-                  settlement_account_name: 'qflcx9877',
-                }
-              })
-            }} >
-            导出
-            </Button>
             <Alert style={{ marginBottom: 10 }} 
                 message={
                  typeof(pagination.total) == "undefined"?

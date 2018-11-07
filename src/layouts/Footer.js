@@ -28,7 +28,7 @@ const FooterView = () => (
       // ]}
       copyright={
         <Fragment>
-          Copyright <Icon type="copyright" /> CPCT
+          Copyright <Icon type="copyright" /> CPCT FOUNDATION LTD.
         </Fragment>
       }
     />

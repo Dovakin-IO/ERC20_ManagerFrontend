@@ -1,4 +1,4 @@
-import { queryUserInfo, addContractAddress } from "@/services/serverapi";
+import { queryUserInfo, addContractAddress,exportVoucherPDF } from "@/services/serverapi";
 import { notification } from "antd";
 
 export default {
@@ -45,7 +45,6 @@ export default {
         yield put({
           type: "add",
           payload: response,
-          isModifyAddress: true
         });
         yield put({
           type: "fetch",
@@ -54,7 +53,22 @@ export default {
           }
         });
       }
-    }
+    },
+    *export({ payload }, { call, put }) {
+      const response = yield call(exportVoucherPDF, payload);
+      if(response) {
+          setTimeout(window.open("http://192.168.0.194:8083/" + response.uri), 500);
+          // window.open("http://192.168.0.194:8083/" + response.uri);
+          notification.open({
+            message: "正在导出！",
+            description: "电子回执单将以PDF格式的文件下载到您的电脑，请注意查看",
+            style: {
+              width: 600,
+              marginLeft: 335 - 600,
+            },
+          });
+      }
+  }
   },
 
   reducers: {
@@ -68,7 +82,7 @@ export default {
     add(state, { payload }) {
       return {
         ...state,
-        isAddSuccess: payload.status
+        isAddSuccess: payload.status,
       };
     }
   }
