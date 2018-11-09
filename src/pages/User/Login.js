@@ -81,7 +81,7 @@ class LoginPage extends Component {
               login.type === 'account' &&
               !submitting &&
               this.renderMessage(formatMessage({ id: 'app.login.message-invalid-credentials' }))}
-            <UserName name="userName" placeholder="请输入账户名" />
+            <UserName name="username" placeholder="请输入账户名" />
             <Password
               name="password"
               placeholder="请输入密码"

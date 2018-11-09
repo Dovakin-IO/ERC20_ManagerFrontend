@@ -15,7 +15,7 @@ export default [
     path: "/",
     component: "../layouts/BasicLayout",
     Routes: ["src/pages/Authorized"],
-    authority: ["admin", "user"],
+    authority: ["dev","admin", "user"],
     routes: [
       // dashboard
       { path: "/", redirect: "/user/login" },
@@ -100,6 +100,7 @@ export default [
           {
             path: "/tx/table-list",
             name: "searchtable",
+            authority: ['admin','user','dev'],
             component: "./TxList/TxSearchList"
           },
           {
@@ -115,6 +116,7 @@ export default [
         path: "/txuser",
         icon: "profile",
         name: "txuser",
+        authority: ['admin','user','dev'],
         routes: [
           {
             path: "/txuser/user_detail",

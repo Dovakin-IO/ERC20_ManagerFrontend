@@ -41,6 +41,7 @@ let routes = [
     "component": dynamic({ loader: () => import('../../layouts/BasicLayout'), loading: require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/components/PageLoading/index').default }),
     "Routes": [require('../Authorized').default],
     "authority": [
+      "dev",
       "admin",
       "user"
     ],
@@ -149,6 +150,11 @@ let routes = [
           {
             "path": "/tx/table-list",
             "name": "searchtable",
+            "authority": [
+              "admin",
+              "user",
+              "dev"
+            ],
             "component": dynamic({ loader: () => import('../TxList/TxSearchList'), loading: require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/components/PageLoading/index').default }),
             "exact": true
           },
@@ -168,6 +174,11 @@ let routes = [
         "path": "/txuser",
         "icon": "profile",
         "name": "txuser",
+        "authority": [
+          "admin",
+          "user",
+          "dev"
+        ],
         "routes": [
           {
             "path": "/txuser/user_detail",
