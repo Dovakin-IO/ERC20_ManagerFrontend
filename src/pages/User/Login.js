@@ -98,14 +98,14 @@ class LoginPage extends Component {
             <Mobile name="mobile" />
             <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
           </Tab> */}
-          <div>
+          {/* <div>
             <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
               <FormattedMessage id="app.login.remember-me" />
             </Checkbox>
             <a style={{ float: 'right' }} href="">
               <FormattedMessage id="app.login.forgot-password" />
             </a>
-          </div>
+          </div> */}
           <Submit loading={submitting}>
             <FormattedMessage id="app.login.login" />
           </Submit>

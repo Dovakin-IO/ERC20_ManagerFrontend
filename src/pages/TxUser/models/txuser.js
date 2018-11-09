@@ -57,10 +57,10 @@ export default {
     *export({ payload }, { call, put }) {
       const response = yield call(exportVoucherPDF, payload);
       if(response) {
-          setTimeout(window.open("http://192.168.0.194:8083/" + response.uri), 500);
+          setTimeout(window.open("http://47.244.9.96:8083/" + response.uri), 500);
           // window.open("http://192.168.0.194:8083/" + response.uri);
           notification.open({
-            message: "正在导出！",
+            message: "正在导出！!!!!!",
             description: "电子回执单将以PDF格式的文件下载到您的电脑，请注意查看",
             style: {
               width: 600,
