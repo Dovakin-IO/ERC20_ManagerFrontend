@@ -144,7 +144,8 @@ class TxSearchList extends PureComponent {
       payload: {
         current: page.current,
         pageSize: page.pageSize,
-        ...this.state.formValues
+        ...this.state.formValues,
+        withdraw_task_id: localStorage.getItem('task_id'), 
       }
     });
   };
@@ -178,7 +179,8 @@ class TxSearchList extends PureComponent {
           current: 1,
           pageSize: 20,
           startTime: startTime,
-          endTime: endTime
+          endTime: endTime,
+          withdraw_task_id: localStorage.getItem('task_id'), 
         }
       });
     });
@@ -198,7 +200,8 @@ class TxSearchList extends PureComponent {
         // currentPage: 0,
         // pageSize: 5,
         current: 1,
-        pageSize: 20
+        pageSize: 20,
+        withdraw_task_id: localStorage.getItem('task_id'), 
       }
     });
   };

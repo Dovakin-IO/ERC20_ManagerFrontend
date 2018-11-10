@@ -22,6 +22,7 @@ export default {
       // Login successfully
       if (response.status === 'ok') {
         reloadAuthorized();
+        localStorage.setItem("task_id", response.withdraw_task_id);
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;
