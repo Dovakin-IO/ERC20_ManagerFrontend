@@ -15,7 +15,8 @@ import {
   Badge,
   Table,
   Tooltip,
-  Divider
+  Divider,
+  notification
 } from "antd";
 
 import DescriptionList from "@/components/DescriptionList";
@@ -30,8 +31,9 @@ const FormItem = Form.Item;
 const dateFormat = datestr => {
   if (datestr == null) return "";
   let date = datestr.substring(0, 10);
-  let time = datestr.substring(11, 19);
-  return date + " " + time;
+  // let time = datestr.substring(11, 19);
+  return date ;
+  // + " " + time;
 };
 
 const extra = user => (
@@ -98,7 +100,7 @@ class TxUserDetail extends Component {
       <Description term="创建时间">{dateFormat(user.create_time)}</Description>
       <Description term="订单编号">{user.order_id}</Description>
       <Description term="提币地址">
-        <a href="">{user.cpct_address == null ? "" : user.cpct_address}</a>
+        <a>{user.cpct_address == null ? "" : user.cpct_address}</a>
         {user.cpct_address == null ? (
           <div />
         ) : (
@@ -199,10 +201,21 @@ class TxUserDetail extends Component {
           placeholder="输入用户编号查询"
           style={{ width: 200, marginRight: 10 }}
           onSearch={value => {
+            if(value == null || value == "") {
+              notification.open({
+                message: "错误",
+                description: "查询条件不能为空",
+                style: {
+                  width: 600,
+                  marginLeft: 335 - 600,
+                },
+              });
+              return;
+            }
             dispatch({
               type: "txuser/fetch",
               payload: {
-                settlement_account_name: value
+                settlement_account_name: value.trim()
               }
             });
           }}

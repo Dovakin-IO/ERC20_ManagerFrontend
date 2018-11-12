@@ -101,9 +101,9 @@ class TxSearchList extends PureComponent {
       width: 150,
       render: (text, record) => (
         <span>
-          <a href="javascript:;">
+          {/* <a href="javascript:;"> */}
             {text.substring(0, 6) + "..." + text.substring(36, 42)}
-          </a>
+          {/* </a> */}
         </span>
       )
     },
@@ -113,9 +113,9 @@ class TxSearchList extends PureComponent {
       width: 150,
       render: (text, record) => (
         <span>
-          <a href="javascript:;">
+          {/* <a href="javascript:;"> */}
             {text.substring(0, 6) + "..." + text.substring(36, 42)}
-          </a>
+          {/* </a> */}
         </span>
       )
     },
@@ -124,7 +124,7 @@ class TxSearchList extends PureComponent {
       dataIndex: "value",
       width: 200,
       render: (text, record) => (
-        <span>{text.substring(0, text.length - 18)}</span>
+        <span>{text.substring(0, text.length - 18) + "." + text.substring(text.length - 18, text.length-12)}</span>
       )
       // 11952000000000000000
     }

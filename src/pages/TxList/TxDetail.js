@@ -84,7 +84,7 @@ class TxDetail extends PureComponent {
             <Timeline.Item color="green">
               交易日期:{" "}
               {moment(new Date(txInfo.timestamp * 1000)).format(
-                "YYYY-MM-DD HH:mm:SS"
+                "YYYY-MM-DD"
               )}
             </Timeline.Item>
             <Timeline.Item color="green">
@@ -94,16 +94,16 @@ class TxDetail extends PureComponent {
               转入地址: {txInfo.token_to}
             </Timeline.Item>
             <Timeline.Item color="green">
-              交易数量: {txInfo.value.substring(0, txInfo.value.length - 18)}
+              交易数量: {txInfo.value.substring(0, txInfo.value.length - 18) + "." + txInfo.value.substring(txInfo.value.length - 18, txInfo.value.length - 12)}
             </Timeline.Item>
             <Timeline.Item color="green">
               gas limit: {txInfo.gasLimit}
             </Timeline.Item>
             <Timeline.Item color="green">
-              gas price: {txInfo.gasPrice}
+              gas price: {txInfo.gasPrice + " wei"}
             </Timeline.Item>
             <Timeline.Item color="green">
-              gas used: {txInfo.gasUsed + " wei"}
+              gas used: {txInfo.gasUsed}
             </Timeline.Item>
           </Timeline>
         </Card>

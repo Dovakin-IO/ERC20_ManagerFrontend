@@ -4,6 +4,7 @@ import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
+import { notification } from 'antd';
 
 export default {
   namespace: 'login',
@@ -39,6 +40,15 @@ export default {
           }
         }
         yield put(routerRedux.replace(redirect || '/tx/table-list'));
+      } else {
+        notification.open({
+          message: "错误",
+          description: response.info,
+          style: {
+            width: 600,
+            marginLeft: 335 - 600,
+          },
+        });
       }
     },
 
