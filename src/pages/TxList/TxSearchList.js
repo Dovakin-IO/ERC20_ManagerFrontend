@@ -211,12 +211,21 @@ class TxSearchList extends PureComponent {
     let y = date.getFullYear();
     let m = "0" + (date.getMonth() + 1);
     let d = "0" + date.getDate();
+    let h = date.getHours();
+    let mm = date.getMinutes();
+    let s = date.getSeconds();
     return (
       y +
       "-" +
       m.substring(m.length - 2, m.length) +
       "-" +
-      d.substring(d.length - 2, d.length)
+      d.substring(d.length - 2, d.length) +
+      " " +
+      h +
+      ":" +
+      mm +
+      ":" +
+      s
     );
   };
 

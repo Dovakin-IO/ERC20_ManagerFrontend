@@ -117,7 +117,8 @@ class TxUserDetail extends Component {
     dispatch({
       type: "txuser/fetch",
       payload: {
-        settlement_account_name: location.query.settlement_account_name
+        settlement_account_name: location.query.settlement_account_name,
+        withdraw_task_id: localStorage.getItem('task_id'),
       }
     });
   }
@@ -161,7 +162,7 @@ class TxUserDetail extends Component {
         type: "txuser/addAddress",
         payload: {
           settlement_account_name: user.settlement_account_name,
-          cpct_address: values.modify_address
+          cpct_address: values.modify_address,
         }
       });
     });
@@ -215,7 +216,8 @@ class TxUserDetail extends Component {
             dispatch({
               type: "txuser/fetch",
               payload: {
-                settlement_account_name: value.trim()
+                settlement_account_name: value.trim(),
+                withdraw_task_id: localStorage.getItem('task_id'),
               }
             });
           }}
