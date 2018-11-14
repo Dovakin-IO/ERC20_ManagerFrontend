@@ -93,6 +93,14 @@ export default function request(url, option) {
         'Content-Type': 'application/json; charset=utf-8',
         ...newOptions.headers,
       };
+
+      // 添加auth header
+      if(sessionStorage.getItem("auth") != null) {
+        newOptions.headers = {
+          Authkey: sessionStorage.getItem("auth"),
+          ...newOptions.headers,
+        };
+      }
       newOptions.body = JSON.stringify(newOptions.body);
     } else {
       // newOptions.body is FormData
@@ -101,6 +109,7 @@ export default function request(url, option) {
         ...newOptions.headers,
       };
     }
+
   }
 
   const expirys = options.expirys && 60;
@@ -141,7 +150,12 @@ export default function request(url, option) {
       }
       // environment should not be used
       if (status === 403) {
-        router.push('/exception/403');
+        // router.push('/exception/403');
+        router.push('/user/login');
+        notification.error({
+          message: `错误`,
+          description: `尚未登陆或登陆过期，请重新登陆`,
+        });
         return;
       }
       if (status <= 504 && status >= 500) {
@@ -150,6 +164,10 @@ export default function request(url, option) {
       }
       if (status >= 404 && status < 422) {
         router.push('/user/login');
+        notification.error({
+          message: `错误`,
+          description: `尚未登陆或登陆过期，请重新登陆`,
+        });
       }
     });
 }

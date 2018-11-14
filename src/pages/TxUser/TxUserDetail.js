@@ -118,7 +118,7 @@ class TxUserDetail extends Component {
       type: "txuser/fetch",
       payload: {
         settlement_account_name: location.query.settlement_account_name,
-        withdraw_task_id: localStorage.getItem('task_id'),
+        withdraw_task_id: sessionStorage.getItem('task_id'),
       }
     });
   }
@@ -217,7 +217,7 @@ class TxUserDetail extends Component {
               type: "txuser/fetch",
               payload: {
                 settlement_account_name: value.trim(),
-                withdraw_task_id: localStorage.getItem('task_id'),
+                withdraw_task_id: sessionStorage.getItem('task_id'),
               }
             });
           }}

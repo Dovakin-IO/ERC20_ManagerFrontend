@@ -145,7 +145,7 @@ class TxSearchList extends PureComponent {
         current: page.current,
         pageSize: page.pageSize,
         ...this.state.formValues,
-        withdraw_task_id: localStorage.getItem('task_id'), 
+        withdraw_task_id: sessionStorage.getItem('task_id'), 
       }
     });
   };
@@ -180,7 +180,7 @@ class TxSearchList extends PureComponent {
           pageSize: 20,
           startTime: startTime,
           endTime: endTime,
-          withdraw_task_id: localStorage.getItem('task_id'), 
+          withdraw_task_id: sessionStorage.getItem('task_id'), 
         }
       });
     });
@@ -201,7 +201,7 @@ class TxSearchList extends PureComponent {
         // pageSize: 5,
         current: 1,
         pageSize: 20,
-        withdraw_task_id: localStorage.getItem('task_id'), 
+        withdraw_task_id: sessionStorage.getItem('task_id'), 
       }
     });
   };
