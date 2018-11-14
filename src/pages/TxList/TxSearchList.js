@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "dva";
 import { routerRedux } from "dva/router";
-import { Card, Form, Row, Col, Input, Table, Button, DatePicker, Alert } from "antd";
+import { Card, Form, Row, Col, Input, Table, Button, DatePicker, Alert, Tag } from "antd";
 import PageHeaderWrapper from "@/components/PageHeaderWrapper";
 import StandardTable from "@/components/StandardTable";
 
@@ -9,6 +9,7 @@ import styles from "./TxSearchList.less";
 
 const FormItem = Form.Item;
 const { RangePicker } = DatePicker;
+
 
 @connect(({ tx, loading }) => ({
   tx,
@@ -24,9 +25,10 @@ class TxSearchList extends PureComponent {
     {
       title: "交易hash",
       dataIndex: "txHash",
-      width: 200,
+      width: 350,
       fixed: true,
       render: (text, record) => (
+        sessionStorage.getItem("credible").indexOf(record.tokenFrom) != -1?
         <span>
           <a
             href="javascript:;"
@@ -41,9 +43,34 @@ class TxSearchList extends PureComponent {
               );
             }}
           >
+          <div>
+            <Tag color="green">平台交易</Tag>
+            { record.cpctAddress === record.fromAddr? <Tag color="orange-inverse">OUT</Tag> : <Tag color="green-inverse">IN</Tag>}
             {text.substring(0, 6) + "..." + text.substring(60, 66)}
+          </div>           
           </a>
-        </span>
+        </span> : 
+                <span>
+                <a
+                  href="javascript:;"
+                  onClick={() => {
+                    this.props.dispatch(
+                      routerRedux.push({
+                        pathname: "/tx/table-detail",
+                        query: {
+                          txHash: text
+                        }
+                      })
+                    );
+                  }}
+                >
+                <div>
+                  <Tag color="red">非平台交易</Tag>
+                  { record.cpctAddress === record.fromAddr? <Tag color="orange-inverse">OUT</Tag> : <Tag color="green-inverse">IN</Tag>}
+                  {text.substring(0, 6) + "..." + text.substring(60, 66)}
+                </div>           
+                </a>
+        </span> 
       )
       // 0x0a44d4537aeea0aec24ed337efe1c9782b0e01036864d3abd706e0b5c287f5dc
       // 0x33cba7065f61e8f66b98e83562a3a3998e31be97
@@ -124,7 +151,7 @@ class TxSearchList extends PureComponent {
       dataIndex: "value",
       width: 200,
       render: (text, record) => (
-        <span>{text.substring(0, text.length - 18) + "." + text.substring(text.length - 18, text.length-12)}</span>
+        <span><strong>{text.substring(0, text.length - 18) + "." + text.substring(text.length - 18, text.length-12)}</strong></span>
       )
       // 11952000000000000000
     }
@@ -175,7 +202,11 @@ class TxSearchList extends PureComponent {
       dispatch({
         type: "tx/fetch",
         payload: {
-          ...values,
+          settlementAccountName: values.settlementAccountName === ''? null : values.settlementAccountName,
+          realName: values.realName === ''? null : values.realName,
+          mobile: values.mobile === ''? null : values.mobile,
+          tokenFrom: values.tokenFrom === ''? null : values.tokenFrom,
+          tokenTo: values.tokenTo === ''? null: values.tokenTo,    
           current: 1,
           pageSize: 20,
           startTime: startTime,
@@ -330,7 +361,7 @@ class TxSearchList extends PureComponent {
               pagination={pagination}
               onChange={this.handleChange}
               columns={this.columns}
-              scroll={{ x: 1500 }}
+              scroll={{ x: 1600 }}
             />
           </div>
         </Card>
