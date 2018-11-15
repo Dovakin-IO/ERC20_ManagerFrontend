@@ -41,6 +41,15 @@ export async function addContractAddress(params) {
     })
 }
 
+export async function queryCredible(params) {
+    return request('/api/api/admin/credible', {
+        method: 'POST',
+        body: {
+            ...params,
+        }
+    })
+}
+
 export async function exportVoucherPDF(params) {
     return request('/api/api/export/voucher', {
         method: 'POST',

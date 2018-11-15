@@ -125,6 +125,20 @@ export default [
           }
         ]
       },
+      // TxUser
+      {
+        path: "/txadmin",
+        icon: "profile",
+        name: "txadmin",
+        authority: ['admin','user','dev'],
+        routes: [
+          {
+            path: "/txadmin/address_list",
+            name: "addresslist",
+            component: "./TxAdmin/TxAddressList"
+          }
+        ]
+      },
       // list
       {
         path: "/list",

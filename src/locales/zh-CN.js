@@ -288,4 +288,6 @@ export default {
   'menu.tx.txdetail': '转账详情',
   'menu.txuser': '基础信息',
   'menu.txuser.userdetail': '用户详情',
+  'menu.txadmin': '平台管理',
+  'menu.txadmin.addresslist': '平台地址',
 };
