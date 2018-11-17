@@ -32,6 +32,7 @@ import Yuan from '@/utils/Yuan';
 import { getTimeDistance } from '@/utils/utils';
 
 import styles from './Analysis.less';
+import Websocket from 'react-websocket';
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
@@ -65,6 +66,7 @@ class Analysis extends Component {
     currentTabKey: '',
     rangePickerValue: getTimeDistance('year'),
     loading: true,
+    test: '',
   };
 
   componentDidMount() {
@@ -101,6 +103,11 @@ class Analysis extends Component {
       currentTabKey: key,
     });
   };
+
+  handleData(data) {
+    let result = JSON.parse(data);
+    this.setState({test: result.currentBlockHeight});
+  }
 
   handleRangePickerChange = rangePickerValue => {
     const { dispatch } = this.props;
@@ -140,7 +147,7 @@ class Analysis extends Component {
   }
 
   render() {
-    const { rangePickerValue, salesType, loading: propsLoding, currentTabKey } = this.state;
+    const { rangePickerValue, salesType, loading: propsLoding, currentTabKey, test } = this.state;
     const { chart, loading: stateLoading } = this.props;
     const {
       visitData,
@@ -283,6 +290,11 @@ class Analysis extends Component {
     return (
       <GridContent>
         <Row gutter={24}>
+        <div>
+            {test}
+            <Websocket url='ws://localhost:8080/monitor'
+              onMessage={this.handleData.bind(this)}/>
+        </div>
           {/* <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
@@ -513,9 +525,9 @@ class Analysis extends Component {
               </TabPane>
             </Tabs>
           </div>
-        </Card>
+        </Card> */}
 
-        <Row gutter={24}>
+        {/* <Row gutter={24}>
           <Col xl={12} lg={24} md={24} sm={24} xs={24}>
             <Card
               loading={loading}
@@ -649,7 +661,7 @@ class Analysis extends Component {
               />
             </Card>
           </Col>
-        </Row>
+        </Row> */}
 
         <Card
           loading={loading}
@@ -658,9 +670,9 @@ class Analysis extends Component {
           bodyStyle={{ padding: '0 0 32px 0' }}
           style={{ marginTop: 32 }}
         >
-          <Tabs activeKey={activeKey} onChange={this.handleTabChange}>
+          {/* <Tabs activeKey={activeKey} onChange={this.handleTabChange}>
             {offlineData.map(shop => (
-              <TabPane tab={<CustomTab data={shop} currentTabKey={activeKey} />} key={shop.name}>
+              <TabPane tab={<CustomTab data={shop} currentTabKey={activeKey} />} key={shop.name}> */}
                 <div style={{ padding: '0 24px' }}>
                   <TimelineChart
                     height={400}
@@ -671,10 +683,10 @@ class Analysis extends Component {
                     }}
                   />
                 </div>
-              </TabPane>
+              {/* </TabPane>
             ))}
-          </Tabs>
-        </Card> */}
+          </Tabs> */}
+        </Card>
       </GridContent>
     );
   }

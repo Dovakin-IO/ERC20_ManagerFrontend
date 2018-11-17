@@ -12,6 +12,8 @@ import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import Authorized from '@/utils/Authorized';
 import styles from './Monitor.less';
 
+import { Util } from '@antv/g2/src';
+
 const { Secured } = Authorized;
 
 const targetTime = new Date().getTime() + 3900000;
@@ -28,6 +30,11 @@ const havePermissionAsync = new Promise(resolve => {
   loading: loading.models.monitor,
 }))
 class Monitor extends PureComponent {
+
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -41,6 +48,7 @@ class Monitor extends PureComponent {
 
     return (
       <GridContent>
+
         <Row gutter={24}>
           <Col xl={18} lg={24} md={24} sm={24} xs={24} style={{ marginBottom: 24 }}>
             <Card

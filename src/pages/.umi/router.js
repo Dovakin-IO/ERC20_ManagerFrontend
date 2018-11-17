@@ -55,7 +55,6 @@ let routes = [
         "path": "/dashboard",
         "name": "dashboard",
         "icon": "dashboard",
-        "hideInMenu": "true",
         "routes": [
           {
             "path": "/dashboard/analysis",
