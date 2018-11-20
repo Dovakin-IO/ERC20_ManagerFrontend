@@ -23,6 +23,8 @@ export default [
         path: "/dashboard",
         name: "dashboard",
         icon: "dashboard",
+        authority: ["dev","admin"],
+        // hideInMenu: "true",
         routes: [
           {
             path: "/dashboard/analysis",
@@ -129,7 +131,7 @@ export default [
         path: "/txadmin",
         icon: "profile",
         name: "txadmin",
-        authority: ['admin','user','dev'],
+        authority: ['admin','dev'],
         routes: [
           {
             path: "/txadmin/address_list",

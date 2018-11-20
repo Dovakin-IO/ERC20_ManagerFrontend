@@ -67,6 +67,8 @@ class Analysis extends Component {
     rangePickerValue: getTimeDistance('year'),
     loading: true,
     test: '',
+    currentBlock: '',
+    checkedBlockHeight: '',
   };
 
   componentDidMount() {
@@ -106,7 +108,11 @@ class Analysis extends Component {
 
   handleData(data) {
     let result = JSON.parse(data);
-    this.setState({test: result.currentBlockHeight});
+    this.setState({
+      test: result.currentBlockHeight,
+      currentBlock: result.currentBlockHeight,
+      checkedBlockHeight: result.checkedBlockHeight,
+    });
   }
 
   handleRangePickerChange = rangePickerValue => {
@@ -147,7 +153,7 @@ class Analysis extends Component {
   }
 
   render() {
-    const { rangePickerValue, salesType, loading: propsLoding, currentTabKey, test } = this.state;
+    const { rangePickerValue, salesType, loading: propsLoding, currentTabKey, test, currentBlock, checkedBlockHeight } = this.state;
     const { chart, loading: stateLoading } = this.props;
     const {
       visitData,
@@ -291,7 +297,6 @@ class Analysis extends Component {
       <GridContent>
         <Row gutter={24}>
         <div>
-            {test}
             <Websocket url='ws://localhost:8080/monitor'
               onMessage={this.handleData.bind(this)}/>
         </div>
@@ -332,7 +337,7 @@ class Analysis extends Component {
               </Trend>
             </ChartCard>
           </Col> */}
-          <Col {...topColResponsiveProps}>
+          {/* <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
               loading={loading}
@@ -359,7 +364,7 @@ class Analysis extends Component {
             >
               <MiniArea color="#975FE4" data={visitData} />
             </ChartCard>
-          </Col>
+          </Col> */}
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
@@ -374,7 +379,7 @@ class Analysis extends Component {
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
-              total={numeral(6560).format('0,0')}
+              total={numeral(currentBlock).format('0,0')}
               footer={
                 <Field
                   label={
@@ -388,7 +393,7 @@ class Analysis extends Component {
               }
               contentHeight={46}
             >
-              <MiniBar data={visitData} />
+              <MiniProgress percent={78} strokeWidth={8} target={80} color="#f50" />
             </ChartCard>
           </Col>
           <Col {...topColResponsiveProps}>
@@ -410,7 +415,7 @@ class Analysis extends Component {
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
-              total="6601218"
+              total={numeral(checkedBlockHeight).format('0,0')}
               footer={
                 <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
                 </div>
@@ -421,6 +426,8 @@ class Analysis extends Component {
             </ChartCard>
           </Col>
         </Row>
+
+        
 
         {/* <Card loading={loading} bordered={false} bodyStyle={{ padding: 0 }}>
           <div className={styles.salesCard}>
@@ -670,9 +677,7 @@ class Analysis extends Component {
           bodyStyle={{ padding: '0 0 32px 0' }}
           style={{ marginTop: 32 }}
         >
-          {/* <Tabs activeKey={activeKey} onChange={this.handleTabChange}>
-            {offlineData.map(shop => (
-              <TabPane tab={<CustomTab data={shop} currentTabKey={activeKey} />} key={shop.name}> */}
+
                 <div style={{ padding: '0 24px' }}>
                   <TimelineChart
                     height={400}
@@ -683,9 +688,7 @@ class Analysis extends Component {
                     }}
                   />
                 </div>
-              {/* </TabPane>
-            ))}
-          </Tabs> */}
+
         </Card>
       </GridContent>
     );

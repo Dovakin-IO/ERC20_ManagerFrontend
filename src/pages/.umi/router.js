@@ -55,6 +55,10 @@ let routes = [
         "path": "/dashboard",
         "name": "dashboard",
         "icon": "dashboard",
+        "authority": [
+          "dev",
+          "admin"
+        ],
         "routes": [
           {
             "path": "/dashboard/analysis",
@@ -196,7 +200,6 @@ let routes = [
         "name": "txadmin",
         "authority": [
           "admin",
-          "user",
           "dev"
         ],
         "routes": [

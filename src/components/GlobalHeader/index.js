@@ -39,7 +39,7 @@ export default class GlobalHeader extends PureComponent {
         <div className={styles.left}>
            欢迎进入生态基金系统
         </div>
-        {/* <RightContent {...this.props} /> */}
+        <RightContent {...this.props} />
       </div>
     );
   }

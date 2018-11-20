@@ -190,16 +190,16 @@ class TxUserDetail extends Component {
     const action = (
       <Fragment>
         {
-          user.cpct_address == null?
+          // user.cpct_address == null?
           <Button type="primary" disabled >导出电子凭证</Button> 
-          : <Button type="primary" onClick={() => {
-            dispatch({
-              type: 'txuser/export',
-              payload: {
-                settlement_account_name: user.settlement_account_name,
-              }
-            })
-          }} >导出电子凭证</Button>
+          // : <Button type="primary" onClick={() => {
+          //   dispatch({
+          //     type: 'txuser/export',
+          //     payload: {
+          //       settlement_account_name: user.settlement_account_name,
+          //     }
+          //   })
+          // }} >导出电子凭证</Button>
         }
         <Search
           placeholder="输入用户编号查询"

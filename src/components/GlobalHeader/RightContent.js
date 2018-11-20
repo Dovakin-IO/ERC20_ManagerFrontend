@@ -51,7 +51,7 @@ export default class GlobalHeaderRight extends PureComponent {
     } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
-        <Menu.Item key="userCenter">
+        {/* <Menu.Item key="userCenter">
           <Icon type="user" />
           <FormattedMessage id="menu.account.center" defaultMessage="account center" />
         </Menu.Item>
@@ -63,7 +63,7 @@ export default class GlobalHeaderRight extends PureComponent {
           <Icon type="close-circle" />
           <FormattedMessage id="menu.account.trigger" defaultMessage="Trigger Error" />
         </Menu.Item>
-        <Menu.Divider />
+        <Menu.Divider /> */}
         <Menu.Item key="logout">
           <Icon type="logout" />
           <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
@@ -77,7 +77,7 @@ export default class GlobalHeaderRight extends PureComponent {
     }
     return (
       <div className={className}>
-        <HeaderSearch
+        {/* <HeaderSearch
           className={`${styles.action} ${styles.search}`}
           placeholder={formatMessage({ id: 'component.globalHeader.search' })}
           dataSource={[
@@ -101,8 +101,8 @@ export default class GlobalHeaderRight extends PureComponent {
           >
             <Icon type="question-circle-o" />
           </a>
-        </Tooltip>
-        <NoticeIcon
+        </Tooltip> */}
+        {/* <NoticeIcon
           className={styles.action}
           count={currentUser.notifyCount}
           onItemClick={(item, tabProps) => {
@@ -138,8 +138,8 @@ export default class GlobalHeaderRight extends PureComponent {
             emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
           />
-        </NoticeIcon>
-        {currentUser.name ? (
+        </NoticeIcon> */}
+        {/* {currentUser.name ? (
           <Dropdown overlay={menu}>
             <span className={`${styles.action} ${styles.account}`}>
               <Avatar
@@ -153,8 +153,22 @@ export default class GlobalHeaderRight extends PureComponent {
           </Dropdown>
         ) : (
           <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
-        )}
-        <SelectLang className={styles.action} />
+        )} */}
+        <Dropdown overlay={menu}>
+            <span className={`${styles.action} ${styles.account}`}>
+              {/* <Avatar
+                size="large"
+                shape="square"
+                // className={styles.avatar}
+                // src={currentUser.avatar}
+                icon="user"
+                // alt="avatar"
+              /> */}
+              <Avatar style={{ backgroundColor: '#f56a00' }} icon="user" />
+              <span className={styles.name}>{currentUser.name}</span>
+            </span>
+        </Dropdown>
+        {/* <SelectLang className={styles.action} /> */}
       </div>
     );
   }
