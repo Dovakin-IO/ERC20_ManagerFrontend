@@ -186,7 +186,7 @@ class TxAddressList extends PureComponent {
                                 <Info title="总转出次数" value={info.transactionCount} bordered />
                             </Col>
                             <Col sm={8} xs={24}>
-                                <Info title="总转出数量" value={info.transactionValue} />
+                                <Info title="总转出数量" value={numeral(info.transactionValue).format('0,0')} />
                             </Col>
                         </Row>
                     </Card>
