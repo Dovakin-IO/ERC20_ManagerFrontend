@@ -10,7 +10,7 @@ import {
   Table,
   Radio,
   DatePicker,
-  // Tooltip,
+  Tooltip,
   Menu,
   Dropdown,
 } from 'antd';
@@ -19,7 +19,7 @@ import {
   Chart,
   Geom,
   Axis,
-  Tooltip,
+  // Tooltip,
   Coord,
   Label,
   Legend,
@@ -88,16 +88,19 @@ class Analysis extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    this.reqRef = requestAnimationFrame(() => {
-      dispatch({
-        type: 'chart/fetch',
-      });
-      this.timeoutId = setTimeout(() => {
-        this.setState({
-          loading: false,
-        });
-      }, 600);
-    });
+    this.setState({
+      loading: false,
+    })
+    // this.reqRef = requestAnimationFrame(() => {
+    //   dispatch({
+    //     type: 'chart/fetch',
+    //   });
+    //   this.timeoutId = setTimeout(() => {
+    //     this.setState({
+    //       loading: false,
+    //     });
+    //   }, 600);
+    // });
   }
 
   componentWillUnmount() {
@@ -685,7 +688,7 @@ class Analysis extends Component {
           </Col>
         </Row> */}
 
-        <Card
+        {/* <Card
           loading={loading}
           className={styles.offlineCard}
           bordered={false}
@@ -704,7 +707,7 @@ class Analysis extends Component {
                   />
                 </div>
 
-        </Card>
+        </Card> */}
       </GridContent>
     );
   }
