@@ -24,7 +24,7 @@ import {
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Result from '@/components/Result';
 import cpctIcon from '../../assets/cpct_icon.png';
-
+import numeral from 'numeral';
 import styles from './TxAddressList.less';
 
 const FormItem = Form.Item;

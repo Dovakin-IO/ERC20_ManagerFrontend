@@ -19,7 +19,7 @@ import {
   Chart,
   Geom,
   Axis,
-  // Tooltip,
+  Tooltip as Tip,
   Coord,
   Label,
   Legend,
@@ -27,7 +27,7 @@ import {
   Guide,
   Shape,
   Facet,
-  Util
+  Util,
 } from "bizcharts";
 import {
   ChartCard,
@@ -45,9 +45,9 @@ import numeral from 'numeral';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import Yuan from '@/utils/Yuan';
 import { getTimeDistance } from '@/utils/utils';
-
 import styles from './Analysis.less';
 import Websocket from 'react-websocket';
+import DataSet from "@antv/data-set";
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
@@ -82,15 +82,54 @@ class Analysis extends Component {
     rangePickerValue: getTimeDistance('year'),
     loading: true,
     test: '',
-    currentBlock: '',
-    checkedBlockHeight: '',
+    currentBlock: undefined,
+    checkedBlockHeight: undefined,
+    analysisData: [
+      {
+        "平台转入": 0,
+        "非平台转入": 0,
+        "会员账户转出": 0
+      },
+      {
+        "平台转入": 0,
+        "非平台转入": 0,
+        "会员账户转出": 0
+      },
+      {
+        "平台转入": 0,
+        "非平台转入": 0,
+        "会员账户转出": 0
+      },
+      {
+        "平台转入": 0,
+        "非平台转入": 0,
+        "会员账户转出": 0
+      },
+      {
+        "平台转入": 0,
+        "非平台转入": 0,
+        "会员账户转出": 0
+      },
+      {
+        "平台转入": 0,
+        "非平台转入": 0,
+        "会员账户转出": 0
+      },
+      {
+        "平台转入": 0,
+        "非平台转入": 0,
+        "会员账户转出": 0
+      },
+    ],
+    transactionData: [],
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
     this.setState({
       loading: false,
-    })
+
+    });
     // this.reqRef = requestAnimationFrame(() => {
     //   dispatch({
     //     type: 'chart/fetch',
@@ -127,9 +166,10 @@ class Analysis extends Component {
   handleData(data) {
     let result = JSON.parse(data);
     this.setState({
-      test: result.currentBlockHeight,
       currentBlock: result.currentBlockHeight,
       checkedBlockHeight: result.checkedBlockHeight,
+      analysisData: result.dataAnalyses? result.dataAnalyses : this.state.analysisData,
+      transactionData: result.analyses? result.analyses : this.state.transactionData,
     });
   }
 
@@ -171,7 +211,9 @@ class Analysis extends Component {
   }
 
   render() {
-    const { rangePickerValue, salesType, loading: propsLoding, currentTabKey, test, currentBlock, checkedBlockHeight } = this.state;
+    const { DataView } = DataSet;
+    const { rangePickerValue, salesType, loading: propsLoding, currentTabKey, 
+      test, currentBlock, checkedBlockHeight, analysisData, transactionData } = this.state;
     const { chart, loading: stateLoading } = this.props;
     const {
       visitData,
@@ -185,6 +227,145 @@ class Analysis extends Component {
       salesTypeDataOffline,
     } = chart;
     const loading = propsLoding || stateLoading;
+
+    // const transactionData = [
+    //   {
+    //     block: 6600000,
+    //     CPCT交易记录数量: 3,
+    //   },
+    //   {
+    //     block: 6600001,
+    //     CPCT交易记录数量: 4,
+    //   },
+    //   {
+    //     block: 6600002,
+    //     CPCT交易记录数量: 1,
+    //   },
+    //   {
+    //     block: 6600003,
+    //     CPCT交易记录数量: 0,
+    //   },
+    //   {
+    //     block: 6600004,
+    //     CPCT交易记录数量: 6,
+    //   },
+    //   {
+    //     block: 6600005,
+    //     CPCT交易记录数量: 5,
+    //   },
+    //   {
+    //     block: 6600006,
+    //     CPCT交易记录数量: 12,
+    //   },
+    //   {
+    //     block: 6600007,
+    //     CPCT交易记录数量: 0,
+    //   },
+    //   {
+    //     block: 6600008,
+    //     CPCT交易记录数量: 2,
+    //   },
+    //   {
+    //     block: 6600010,
+    //     CPCT交易记录数量: 15,
+    //   },
+    //   {
+    //     block: 6600009,
+    //     CPCT交易记录数量: 1,
+    //   },
+
+    // ];
+
+    const cols = {
+      交易记录数量: {
+        min: 0
+      },
+      block: {
+        range: [0, 0.9]
+      }
+    };
+
+    const data = [
+      {
+        group: "闽东",
+        type: "闽东",
+        "平台转入": analysisData[0].平台转入,
+        "非平台转入": analysisData[0].非平台转入,
+        "会员账户转出": analysisData[0].会员账户转出
+      },
+      {
+        group: "华东",
+        type: "华东",
+        "平台转入": analysisData[1].平台转入,
+        "非平台转入": analysisData[1].非平台转入,
+        "会员账户转出": analysisData[1].会员账户转出
+      },
+      {
+        group: "云贵",
+        type: "云贵",
+        "平台转入": analysisData[2].平台转入,
+        "非平台转入": analysisData[2].非平台转入,
+        "会员账户转出": analysisData[2].会员账户转出
+      },
+      {
+        group: "川渝",
+        type: "川渝",
+        "平台转入": analysisData[3].平台转入,
+        "非平台转入": analysisData[3].非平台转入,
+        "会员账户转出": analysisData[3].会员账户转出
+      },
+      {
+        group: "闵浙",
+        type: "闵浙",
+        "平台转入": analysisData[4].平台转入,
+        "非平台转入": analysisData[4].非平台转入,
+        "会员账户转出": analysisData[4].会员账户转出
+      },
+      {
+        group: "互生",
+        type: "互生",
+        "平台转入": analysisData[5].平台转入,
+        "非平台转入": analysisData[5].非平台转入,
+        "会员账户转出": analysisData[5].会员账户转出
+      },
+      {
+        group: "江北凯里",
+        type: "江北凯里",
+        "平台转入": analysisData[6].平台转入,
+        "非平台转入": analysisData[6].非平台转入,
+        "会员账户转出": analysisData[6].会员账户转出
+      },
+    ];
+    const dv = new DataView();
+    dv.source(data)
+      .transform({
+        type: "map",
+
+        callback(row) {
+          row["会员账户转出"] *= -1;
+          return row;
+        }
+      })
+      .transform({
+        type: "fold",
+        fields: [
+          "会员账户转出",
+          "非平台转入",
+          "平台转入"
+        ],
+        key: "opinion",
+        value: "value",
+        retains: ["group", "type"]
+      });
+    const colorMap = {
+      "平台转入": "#3561A7",
+      // Agree: "#80B2D3",
+      "非平台转入": "#D9F0F6",
+      // Disagree: "#EC7743",
+      "会员账户转出": "#CB2920"
+    };
+
+
     let salesPieData;
     if (salesType === 'all') {
       salesPieData = salesTypeData;
@@ -315,74 +496,11 @@ class Analysis extends Component {
       <GridContent>
         <Row gutter={24}>
         <div>
-            <Websocket url='ws://localhost:8080/monitor'
+            <Websocket 
+              url='ws://47.244.9.96/ws/monitor'
+              // url='ws://127.0.0.1:8080/monitor'
               onMessage={this.handleData.bind(this)}/>
         </div>
-          {/* <Col {...topColResponsiveProps}>
-            <ChartCard
-              bordered={false}
-              title={
-                <FormattedMessage id="app.analysis.total-sales" defaultMessage="Total Sales" />
-              }
-              action={
-                <Tooltip
-                  title={
-                    <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
-                  }
-                >
-                  <Icon type="info-circle-o" />
-                </Tooltip>
-              }
-              loading={loading}
-              total={() => <Yuan>126560</Yuan>}
-              footer={
-                <Field
-                  label={
-                    <FormattedMessage id="app.analysis.day-sales" defaultMessage="Day Sales" />
-                  }
-                  value={`￥${numeral(12423).format('0,0')}`}
-                />
-              }
-              contentHeight={46}
-            >
-              <Trend flag="up" style={{ marginRight: 16 }}>
-                <FormattedMessage id="app.analysis.week" defaultMessage="Weekly Changes" />
-                <span className={styles.trendText}>12%</span>
-              </Trend>
-              <Trend flag="down">
-                <FormattedMessage id="app.analysis.day" defaultMessage="Daily Changes" />
-                <span className={styles.trendText}>11%</span>
-              </Trend>
-            </ChartCard>
-          </Col> */}
-          {/* <Col {...topColResponsiveProps}>
-            <ChartCard
-              bordered={false}
-              loading={loading}
-              title={<FormattedMessage id="app.analysis.visits" defaultMessage="visits" />}
-              action={
-                <Tooltip
-                  title={
-                    <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
-                  }
-                >
-                  <Icon type="info-circle-o" />
-                </Tooltip>
-              }
-              total={numeral(5.1).format('0,0.0')}
-              footer={
-                <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
-                  <Trend flag="up" style={{ marginRight: 16 }}>
-                    <FormattedMessage id="cpct.price.change" defaultMessage="rate" />
-                    <span className={styles.trendText}>12%</span>
-                  </Trend>
-                </div>
-              }
-              contentHeight={46}
-            >
-              <MiniArea color="#975FE4" data={visitData} />
-            </ChartCard>
-          </Col> */}
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
@@ -397,17 +515,15 @@ class Analysis extends Component {
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
-              total={numeral(currentBlock).format('0,0')}
+            
+              total={
+                currentBlock ?
+                numeral(currentBlock).format('0,0')
+                : "正在获取"
+              }
               footer={
-                <Field
-                  label={
-                    <FormattedMessage
-                      id="app.analysis.conversion-rate"
-                      defaultMessage="Conversion Rate"
-                    />
-                  }
-                  value="60%"
-                />
+                <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                </div>
               }
               contentHeight={46}
             >
@@ -433,7 +549,11 @@ class Analysis extends Component {
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
-              total={numeral(checkedBlockHeight).format('0,0')}
+              total={
+                checkedBlockHeight ?
+                numeral(checkedBlockHeight).format('0,0')
+                : "正在获取"
+              }
               footer={
                 <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
                 </div>
@@ -445,269 +565,71 @@ class Analysis extends Component {
           </Col>
         </Row>
 
-        
-
-        {/* <Card loading={loading} bordered={false} bodyStyle={{ padding: 0 }}>
-          <div className={styles.salesCard}>
-            <Tabs tabBarExtraContent={salesExtra} size="large" tabBarStyle={{ marginBottom: 24 }}>
-              <TabPane
-                tab={<FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />}
-                key="sales"
-              >
-                <Row>
-                  <Col xl={16} lg={12} md={12} sm={24} xs={24}>
-                    <div className={styles.salesBar}>
-                      <Bar
-                        height={295}
-                        title={
-                          <FormattedMessage
-                            id="app.analysis.sales-trend"
-                            defaultMessage="Sales Trend"
-                          />
-                        }
-                        data={salesData}
-                      />
-                    </div>
-                  </Col>
-                  <Col xl={8} lg={12} md={12} sm={24} xs={24}>
-                    <div className={styles.salesRank}>
-                      <h4 className={styles.rankingTitle}>
-                        <FormattedMessage
-                          id="app.analysis.sales-ranking"
-                          defaultMessage="Sales Ranking"
-                        />
-                      </h4>
-                      <ul className={styles.rankingList}>
-                        {this.rankingListData.map((item, i) => (
-                          <li key={item.title}>
-                            <span
-                              className={`${styles.rankingItemNumber} ${
-                                i < 3 ? styles.active : ''
-                              }`}
-                            >
-                              {i + 1}
-                            </span>
-                            <span className={styles.rankingItemTitle} title={item.title}>
-                              {item.title}
-                            </span>
-                            <span className={styles.rankingItemValue}>
-                              {numeral(item.total).format('0,0')}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </Col>
-                </Row>
-              </TabPane>
-              <TabPane
-                tab={<FormattedMessage id="app.analysis.visits" defaultMessage="Visits" />}
-                key="views"
-              >
-                <Row>
-                  <Col xl={16} lg={12} md={12} sm={24} xs={24}>
-                    <div className={styles.salesBar}>
-                      <Bar
-                        height={292}
-                        title={
-                          <FormattedMessage
-                            id="app.analysis.visits-trend"
-                            defaultMessage="Visits Trend"
-                          />
-                        }
-                        data={salesData}
-                      />
-                    </div>
-                  </Col>
-                  <Col xl={8} lg={12} md={12} sm={24} xs={24}>
-                    <div className={styles.salesRank}>
-                      <h4 className={styles.rankingTitle}>
-                        <FormattedMessage
-                          id="app.analysis.visits-ranking"
-                          defaultMessage="Visits Ranking"
-                        />
-                      </h4>
-                      <ul className={styles.rankingList}>
-                        {this.rankingListData.map((item, i) => (
-                          <li key={item.title}>
-                            <span
-                              className={`${styles.rankingItemNumber} ${
-                                i < 3 ? styles.active : ''
-                              }`}
-                            >
-                              {i + 1}
-                            </span>
-                            <span className={styles.rankingItemTitle} title={item.title}>
-                              {item.title}
-                            </span>
-                            <span>{numeral(item.total).format('0,0')}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </Col>
-                </Row>
-              </TabPane>
-            </Tabs>
-          </div>
-        </Card> */}
-
-        {/* <Row gutter={24}>
-          <Col xl={12} lg={24} md={24} sm={24} xs={24}>
-            <Card
-              loading={loading}
-              bordered={false}
-              title={
-                <FormattedMessage
-                  id="app.analysis.online-top-search"
-                  defaultMessage="Online Top Search"
-                />
-              }
-              extra={iconGroup}
-              style={{ marginTop: 24 }}
-            >
-              <Row gutter={68}>
-                <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
-                  <NumberInfo
-                    subTitle={
-                      <span>
-                        <FormattedMessage
-                          id="app.analysis.search-users"
-                          defaultMessage="search users"
-                        />
-                        <Tooltip
-                          title={
-                            <FormattedMessage
-                              id="app.analysis.introduce"
-                              defaultMessage="introduce"
-                            />
-                          }
-                        >
-                          <Icon style={{ marginLeft: 8 }} type="info-circle-o" />
-                        </Tooltip>
-                      </span>
-                    }
-                    gap={8}
-                    total={numeral(12321).format('0,0')}
-                    status="up"
-                    subTotal={17.1}
-                  />
-                  <MiniArea line height={45} data={visitData2} />
-                </Col>
-                <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
-                  <NumberInfo
-                    subTitle={
-                      <span>
-                        <FormattedMessage
-                          id="app.analysis.per-capita-search"
-                          defaultMessage="Per Capita Search"
-                        />
-                        <Tooltip
-                          title={
-                            <FormattedMessage
-                              id="app.analysis.introduce"
-                              defaultMessage="introduce"
-                            />
-                          }
-                        >
-                          <Icon style={{ marginLeft: 8 }} type="info-circle-o" />
-                        </Tooltip>
-                      </span>
-                    }
-                    total={2.7}
-                    status="down"
-                    subTotal={26.2}
-                    gap={8}
-                  />
-                  <MiniArea line height={45} data={visitData2} />
-                </Col>
-              </Row>
-              <Table
-                rowKey={record => record.index}
-                size="small"
-                columns={columns}
-                dataSource={searchData}
-                pagination={{
-                  style: { marginBottom: 0 },
-                  pageSize: 5,
-                }}
-              />
-            </Card>
-          </Col>
-          <Col xl={12} lg={24} md={24} sm={24} xs={24}>
-            <Card
-              loading={loading}
-              className={styles.salesCard}
-              bordered={false}
-              title={
-                <FormattedMessage
-                  id="app.analysis.the-proportion-of-sales"
-                  defaultMessage="The Proportion of Sales"
-                />
-              }
-              bodyStyle={{ padding: 24 }}
-              extra={
-                <div className={styles.salesCardExtra}>
-                  {iconGroup}
-                  <div className={styles.salesTypeRadio}>
-                    <Radio.Group value={salesType} onChange={this.handleChangeSalesType}>
-                      <Radio.Button value="all">
-                        <FormattedMessage id="app.analysis.channel.all" defaultMessage="ALL" />
-                      </Radio.Button>
-                      <Radio.Button value="online">
-                        <FormattedMessage
-                          id="app.analysis.channel.online"
-                          defaultMessage="Online"
-                        />
-                      </Radio.Button>
-                      <Radio.Button value="stores">
-                        <FormattedMessage
-                          id="app.analysis.channel.stores"
-                          defaultMessage="Stores"
-                        />
-                      </Radio.Button>
-                    </Radio.Group>
-                  </div>
-                </div>
-              }
-              style={{ marginTop: 24, minHeight: 509 }}
-            >
-              <h4 style={{ marginTop: 8, marginBottom: 32 }}>
-                <FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />
-              </h4>
-              <Pie
-                hasLegend
-                subTitle={<FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />}
-                total={() => <Yuan>{salesPieData.reduce((pre, now) => now.y + pre, 0)}</Yuan>}
-                data={salesPieData}
-                valueFormat={value => <Yuan>{value}</Yuan>}
-                height={248}
-                lineWidth={4}
-              />
-            </Card>
-          </Col>
-        </Row> */}
-
-        {/* <Card
-          loading={loading}
-          className={styles.offlineCard}
-          bordered={false}
-          bodyStyle={{ padding: '0 0 32px 0' }}
-          style={{ marginTop: 32 }}
-        >
-
-                <div style={{ padding: '0 24px' }}>
-                  <TimelineChart
-                    height={400}
-                    data={offlineChartData}
-                    titleMap={{
-                      y1: formatMessage({ id: 'app.analysis.traffic' }),
-                      y2: formatMessage({ id: 'app.analysis.payments' }),
+        <Row gutter={24}>      
+            <Col span={12}>
+              <Card
+                >
+                <Chart height={400} data={transactionData} scale={cols} forceFit>
+                  <Axis name="block" />
+                  <Axis name="交易记录数量" />
+                  <Tip
+                    crosshairs={{
+                      type: "y"
                     }}
                   />
-                </div>
+                  <Geom type="line" position="block*交易记录数量" size={2} />
+                  <Geom
+                    type="point"
+                    position="block*交易记录数量"
+                    size={5}
+                    shape={"circle"}
+                    style={{
+                      stroke: "#fff",
+                      lineWidth: 1
+                    }}
+                  />
+                </Chart>
+              </Card>
+            </Col>
 
-        </Card> */}
+            <Col span={12}>
+              <Card
+                loading={false}
+                >
+                <Chart 
+                  // height={window.innerHeight} 
+                  height={400}
+                  data={dv} 
+                  forceFit>
+                  <Axis name="type" title={null} labelOffset={10} />
+                  <Axis
+                    name="value"
+                    title={null}
+                    tickLine={null}
+                    position="right"
+                    formatter={function(val) {
+                      return val + "%";
+                    }}
+                  />
+                  <Coord transpose />
+                  <Tip />
+                  <Legend />
+                  <Geom
+                    type="intervalStack"
+                    position="type*value"
+                    color={[
+                      "opinion",
+                      function(opinion) {
+                        return colorMap[opinion];
+                      }
+                    ]}
+                    shape="smooth"
+                    opacity={0.8}
+                  />
+                </Chart>
+              </Card>  
+            </Col>
+        </Row>
       </GridContent>
     );
   }

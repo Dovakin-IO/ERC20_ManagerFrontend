@@ -19,10 +19,9 @@ export default {
 
   effects: {
     *fetch(_, { call, put }) {
-      const response = yield call(fakeChartData);
       yield put({
         type: 'save',
-        payload: response,
+        payload: null,
       });
     },
     *fetchSalesData(_, { call, put }) {
