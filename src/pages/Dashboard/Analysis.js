@@ -10,10 +10,25 @@ import {
   Table,
   Radio,
   DatePicker,
-  Tooltip,
+  // Tooltip,
   Menu,
   Dropdown,
 } from 'antd';
+import {
+  G2,
+  Chart,
+  Geom,
+  Axis,
+  Tooltip,
+  Coord,
+  Label,
+  Legend,
+  View,
+  Guide,
+  Shape,
+  Facet,
+  Util
+} from "bizcharts";
 import {
   ChartCard,
   MiniArea,
@@ -373,7 +388,7 @@ class Analysis extends Component {
               action={
                 <Tooltip
                   title={
-                    <FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />
+                    <FormattedMessage id="app.analysis.blocksync" defaultMessage="Introduce" />
                   }
                 >
                   <Icon type="info-circle-o" />
@@ -409,7 +424,7 @@ class Analysis extends Component {
               action={
                 <Tooltip
                   title={
-                    <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
+                    <FormattedMessage id="app.analysis.blockcheck" defaultMessage="introduce" />
                   }
                 >
                   <Icon type="info-circle-o" />

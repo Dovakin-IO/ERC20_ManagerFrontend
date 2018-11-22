@@ -122,6 +122,8 @@ export default {
   'app.home.introduce': '介绍',
   'app.analysis.test': '工专路 {no} 号店',
   'app.analysis.introduce': '指标说明',
+  'app.analysis.blocksync': '当前平台已同步的区块高度，如果您在平台没有查到您的交易信息，请耐心等待同步',
+  'app.analysis.blockcheck': '当前平台已校验的区块高度，如果您在平台查到的交易信息有误，请等待校验到您的交易所在区块高度后再次查询',
   'app.analysis.total-sales': '总销售额',
   'app.analysis.day-sales': '日销售额',
   'cpct.price.change': '涨幅',
