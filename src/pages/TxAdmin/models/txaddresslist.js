@@ -4,9 +4,9 @@ export default {
     namespace: 'txaddresslist',
     state: {
         info: {
-            addressCount: 6,
-            transactionCount: 2102309,
-            transactionValue: 1982787,
+            addressCount: 0,
+            transactionCount: 0,
+            transactionValue: 0,
         },
         list: [
             // {

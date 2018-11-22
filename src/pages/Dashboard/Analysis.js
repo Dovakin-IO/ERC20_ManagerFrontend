@@ -67,22 +67,25 @@ class Analysis extends Component {
     rangePickerValue: getTimeDistance('year'),
     loading: true,
     test: '',
-    currentBlock: '',
-    checkedBlockHeight: '',
+    currentBlock: undefined,
+    checkedBlockHeight: undefined,
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
-    this.reqRef = requestAnimationFrame(() => {
-      dispatch({
-        type: 'chart/fetch',
-      });
-      this.timeoutId = setTimeout(() => {
-        this.setState({
-          loading: false,
-        });
-      }, 600);
+    this.setState({
+      loading: false,
     });
+    // this.reqRef = requestAnimationFrame(() => {
+    //   dispatch({
+    //     type: 'chart/fetch',
+    //   });
+    //   this.timeoutId = setTimeout(() => {
+    //     this.setState({
+    //       loading: false,
+    //     });
+    //   }, 600);
+    // });
   }
 
   componentWillUnmount() {
@@ -297,7 +300,7 @@ class Analysis extends Component {
       <GridContent>
         <Row gutter={24}>
         <div>
-            <Websocket url='ws://localhost:8080/monitor'
+            <Websocket url='ws://47.244.9.96/ws/monitor'
               onMessage={this.handleData.bind(this)}/>
         </div>
           {/* <Col {...topColResponsiveProps}>
@@ -379,17 +382,15 @@ class Analysis extends Component {
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
-              total={numeral(currentBlock).format('0,0')}
+            
+              total={
+                currentBlock ?
+                numeral(currentBlock).format('0,0')
+                : "正在获取"
+              }
               footer={
-                <Field
-                  label={
-                    <FormattedMessage
-                      id="app.analysis.conversion-rate"
-                      defaultMessage="Conversion Rate"
-                    />
-                  }
-                  value="60%"
-                />
+                <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                </div>
               }
               contentHeight={46}
             >
@@ -415,7 +416,11 @@ class Analysis extends Component {
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
-              total={numeral(checkedBlockHeight).format('0,0')}
+              total={
+                checkedBlockHeight ?
+                numeral(checkedBlockHeight).format('0,0')
+                : "正在获取"
+              }
               footer={
                 <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
                 </div>
@@ -670,7 +675,7 @@ class Analysis extends Component {
           </Col>
         </Row> */}
 
-        <Card
+        {/* <Card
           loading={loading}
           className={styles.offlineCard}
           bordered={false}
@@ -689,7 +694,7 @@ class Analysis extends Component {
                   />
                 </div>
 
-        </Card>
+        </Card> */}
       </GridContent>
     );
   }
