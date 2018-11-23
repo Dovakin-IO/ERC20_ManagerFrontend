@@ -154,7 +154,7 @@ export default class GlobalHeaderRight extends PureComponent {
         ) : (
           <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
         )} */}
-        <Dropdown overlay={menu}>
+        <Dropdown overlay={menu} marginRight={24}>
             <span className={`${styles.action} ${styles.account}`}>
               {/* <Avatar
                 size="large"
@@ -164,8 +164,12 @@ export default class GlobalHeaderRight extends PureComponent {
                 icon="user"
                 // alt="avatar"
               /> */}
-              <Avatar style={{ backgroundColor: '#f56a00' }} icon="user" />
-              <span className={styles.name}>{currentUser.name}</span>
+              {/* <Avatar style={{ backgroundColor: '#f56a00' }} icon="user" />
+              <span className={styles.name}>{currentUser.name}</span> */}
+              <a className="ant-dropdown-link" href="#">
+                {sessionStorage.getItem("currentUserName")} <Icon type="down" />
+              </a>
+              
             </span>
         </Dropdown>
         {/* <SelectLang className={styles.action} /> */}

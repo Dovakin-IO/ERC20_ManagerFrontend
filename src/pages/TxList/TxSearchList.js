@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "dva";
 import { routerRedux } from "dva/router";
-import { Card, Form, Row, Col, Input, Table, Button, DatePicker, Alert, Tag } from "antd";
+import { Card, Form, Row, Col, Input, Table, Button, DatePicker, Alert, Tag, Select } from "antd";
 import PageHeaderWrapper from "@/components/PageHeaderWrapper";
 import StandardTable from "@/components/StandardTable";
 
@@ -9,7 +9,7 @@ import styles from "./TxSearchList.less";
 
 const FormItem = Form.Item;
 const { RangePicker } = DatePicker;
-
+const Option = Select.Option;
 
 @connect(({ tx, loading }) => ({
   tx,
@@ -105,14 +105,14 @@ class TxSearchList extends PureComponent {
       )
     },
     {
+      title: "地区",
+      dataIndex: "areaName",
+      width: 150
+    },
+    {
       title: "手机号",
       dataIndex: "mobile",
       width: 200
-    },
-    {
-      title: "块",
-      dataIndex: "blockHeight",
-      width: 150
     },
     {
       title: "交易时间",
@@ -154,7 +154,12 @@ class TxSearchList extends PureComponent {
         <span><strong>{text.substring(0, text.length - 18) + "." + text.substring(text.length - 18, text.length-12)}</strong></span>
       )
       // 11952000000000000000
-    }
+    },
+    {
+      title: "块",
+      dataIndex: "blockHeight",
+      width: 150
+    },
   ];
 
   componentDidMount() {
@@ -206,7 +211,9 @@ class TxSearchList extends PureComponent {
           realName: values.realName === ''? null : values.realName,
           mobile: values.mobile === ''? null : values.mobile,
           tokenFrom: values.tokenFrom === ''? null : values.tokenFrom,
-          tokenTo: values.tokenTo === ''? null: values.tokenTo,    
+          tokenTo: values.tokenTo === ''? null: values.tokenTo,  
+          accountPrefix: values.accountPrefix,
+          namePrefix: values.namePrefix, 
           current: 1,
           pageSize: 20,
           startTime: startTime,
@@ -278,19 +285,38 @@ class TxSearchList extends PureComponent {
     const rangeTimeConfig = {
       rules: [{ type: "array" }]
     };
+
+    const preAccountfixSelector = getFieldDecorator('accountPrefix', {
+      initialValue: '0',
+    })(
+      <Select style={{ width: 100 }}>
+        <Option value="0">模糊查询</Option>
+        <Option value="1">精确查询</Option>
+      </Select>
+    );
+
+    const preNamefixSelector = getFieldDecorator('namePrefix', {
+      initialValue: '0',
+    })(
+      <Select style={{ width: 100 }}>
+        <Option value="0">模糊查询</Option>
+        <Option value="1">精确查询</Option>
+      </Select>
+    );
+
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="客户编号">
               {getFieldDecorator("settlementAccountName")(
-                <Input placeholder="请输入" />
+                <Input addonAfter={preAccountfixSelector} placeholder="请输入" />
               )}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="客户姓名">
-              {getFieldDecorator("realName")(<Input placeholder="请输入" />)}
+              {getFieldDecorator("realName")(<Input addonAfter={preNamefixSelector} placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -322,7 +348,7 @@ class TxSearchList extends PureComponent {
         </Row>
         <div style={{ overflow: "hidden" }}>
           <div style={{ float: "right", marginBottom: 24 }}>
-            <Button type="primary" onClick={this.handleSearch}>
+            <Button type="primary" htmlType="submit" onClick={this.handleSearch}>
               查询
             </Button>
             <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
@@ -361,7 +387,7 @@ class TxSearchList extends PureComponent {
               pagination={pagination}
               onChange={this.handleChange}
               columns={this.columns}
-              scroll={{ x: 1600 }}
+              scroll={{ x: 1800 }}
             />
           </div>
         </Card>

@@ -15,7 +15,7 @@ export default [
     path: "/",
     component: "../layouts/BasicLayout",
     Routes: ["src/pages/Authorized"],
-    authority: ["dev","admin", "user"],
+    authority: ["dev","admin", "user", "onlysearch"],
     routes: [
       // dashboard
       { path: "/", redirect: "/user/login" },
@@ -23,7 +23,7 @@ export default [
         path: "/dashboard",
         name: "dashboard",
         icon: "dashboard",
-        authority: ["dev","admin"],
+        authority: ["dev","admin","onlysearch"],
         // hideInMenu: "true",
         routes: [
           {
@@ -101,7 +101,7 @@ export default [
           {
             path: "/tx/table-list",
             name: "searchtable",
-            authority: ['admin','user','dev'],
+            authority: ['admin','user','dev','onlysearch'],
             component: "./TxList/TxSearchList"
           },
           {
@@ -117,7 +117,7 @@ export default [
         path: "/txuser",
         icon: "profile",
         name: "txuser",
-        authority: ['admin','user','dev'],
+        authority: ['admin','user','dev','onlysearch'],
         routes: [
           {
             path: "/txuser/user_detail",
@@ -131,7 +131,7 @@ export default [
         path: "/txadmin",
         icon: "profile",
         name: "txadmin",
-        authority: ['admin','dev'],
+        authority: ['admin','dev','onlysearch'],
         routes: [
           {
             path: "/txadmin/address_list",

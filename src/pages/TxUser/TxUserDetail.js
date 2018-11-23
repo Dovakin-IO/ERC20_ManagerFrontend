@@ -107,7 +107,13 @@ class TxUserDetail extends Component {
         {user.cpct_address == null ? (
           <div />
         ) : (
-          <Button style={{ marginLeft: 10}} type="danger" size="small" ghost onClick={this.toggle}>
+          <Button 
+            style={{ marginLeft: 10}} 
+            type="danger" 
+            size="small" 
+            disabled={sessionStorage.getItem("role") === 'onlysearch'} 
+            ghost 
+            onClick={this.toggle}>
             修改地址
           </Button>
         )}
@@ -224,6 +230,7 @@ class TxUserDetail extends Component {
               }
             });
           }}
+          enterButton
         />
         {/* <Button type="primary">编辑</Button> */}
       </Fragment>

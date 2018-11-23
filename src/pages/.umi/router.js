@@ -43,7 +43,8 @@ let routes = [
     "authority": [
       "dev",
       "admin",
-      "user"
+      "user",
+      "onlysearch"
     ],
     "routes": [
       {
@@ -57,7 +58,8 @@ let routes = [
         "icon": "dashboard",
         "authority": [
           "dev",
-          "admin"
+          "admin",
+          "onlysearch"
         ],
         "routes": [
           {
@@ -156,7 +158,8 @@ let routes = [
             "authority": [
               "admin",
               "user",
-              "dev"
+              "dev",
+              "onlysearch"
             ],
             "component": dynamic({ loader: () => import('../TxList/TxSearchList'), loading: require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/components/PageLoading/index').default }),
             "exact": true
@@ -180,7 +183,8 @@ let routes = [
         "authority": [
           "admin",
           "user",
-          "dev"
+          "dev",
+          "onlysearch"
         ],
         "routes": [
           {
@@ -200,7 +204,8 @@ let routes = [
         "name": "txadmin",
         "authority": [
           "admin",
-          "dev"
+          "dev",
+          "onlysearch"
         ],
         "routes": [
           {
