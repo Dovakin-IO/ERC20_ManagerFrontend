@@ -51,7 +51,7 @@ const columns = [
     dataIndex: "cpct_address",
     key: "cpct_address",
     render: (text, record) => (
-      <a href={'https://etherscan.io/address/' + text + '#tokentxns'}>{text}</a>
+      <a href={'https://etherscan.io/address/' + text + '#tokentxns' } target="_blank">{text}</a>
     )
   },
   {
@@ -103,7 +103,7 @@ class TxUserDetail extends Component {
       <Description term="创建时间">{dateFormat(user.create_time)}</Description>
       <Description term="订单编号">{user.order_id}</Description>
       <Description term="提币地址">
-        <a href={'https://etherscan.io/address/' + user.cpct_address + '#tokentxns'}>{user.cpct_address == null ? "" : user.cpct_address}</a>
+        <a href={'https://etherscan.io/address/' + user.cpct_address + '#tokentxns'} target="_blank">{user.cpct_address == null ? "" : user.cpct_address}</a>
         {user.cpct_address == null ? (
           <div />
         ) : (
