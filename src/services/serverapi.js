@@ -5,6 +5,7 @@ import request from '@/utils/request';
 //     return request(`/api/api/tx?${stringify(params)}`);
 // }
 
+
 export async function queryTransactions(params) {
     return request('/api/api/tx', {
         method: 'POST',
@@ -25,6 +26,15 @@ export async function queryTransaction(params) {
 
 export async function queryUserInfo(params) {
     return request('/api/api/user/detail', {
+        method: 'POST',
+        body: {
+            ...params,
+        }
+    })
+}
+
+export async function queryUserList(params) {
+    return request('/api/api/user/list', {
         method: 'POST',
         body: {
             ...params,

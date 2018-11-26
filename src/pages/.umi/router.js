@@ -194,6 +194,12 @@ let routes = [
             "exact": true
           },
           {
+            "path": "/txuser/user_list",
+            "name": "userlist",
+            "component": dynamic({ loader: () => import('../TxUser/TxUserList'), loading: require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/components/PageLoading/index').default }),
+            "exact": true
+          },
+          {
             "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]

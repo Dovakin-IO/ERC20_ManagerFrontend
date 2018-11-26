@@ -123,6 +123,11 @@ export default [
             path: "/txuser/user_detail",
             name: "userdetail",
             component: "./TxUser/TxUserDetail"
+          },
+          {
+            path: "/txuser/user_list",
+            name: "userlist",
+            component: "./TxUser/TxUserList"
           }
         ]
       },
