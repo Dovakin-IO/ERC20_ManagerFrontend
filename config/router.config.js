@@ -128,6 +128,12 @@ export default [
             path: "/txuser/user_list",
             name: "userlist",
             component: "./TxUser/TxUserList"
+          },
+          {
+            path: "/txuser/user_edit",
+            name: "useredit",
+            component: "./TxUser/TxUserEdit",
+            hideInMenu: "true",
           }
         ]
       },

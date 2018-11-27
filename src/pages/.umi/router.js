@@ -200,6 +200,13 @@ let routes = [
             "exact": true
           },
           {
+            "path": "/txuser/user_edit",
+            "name": "useredit",
+            "component": dynamic({ loader: () => import('../TxUser/TxUserEdit'), loading: require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/components/PageLoading/index').default }),
+            "hideInMenu": "true",
+            "exact": true
+          },
+          {
             "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]

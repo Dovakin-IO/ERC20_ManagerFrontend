@@ -4,6 +4,7 @@ import { routerRedux } from "dva/router";
 import { Card, Form, Row, Col, Input, Table, Button, DatePicker, Alert, Tag, Select } from "antd";
 import PageHeaderWrapper from "@/components/PageHeaderWrapper";
 import StandardTable from "@/components/StandardTable";
+import { message } from 'antd';
 
 import styles from "./TxUserList.less";
 
@@ -43,7 +44,7 @@ class TxUserList extends PureComponent {
                     {text}
                   </a>
                 </span>
-              )
+            )
         },
         {
             title: "姓名",
@@ -66,7 +67,21 @@ class TxUserList extends PureComponent {
             width: 150,
             render: (text, record) => (
                 <span>
-                    <a href="javascript:;">修改</a>
+                    <a href="javascript:;"                     
+                      onClick={() => {
+                        if(sessionStorage.getItem("role") === 'onlysearch'){
+                            message.error("您当前没有修改权限！");
+                            return;
+                        }
+                        this.props.dispatch(
+                            routerRedux.push({
+                            pathname: "/txuser/user_edit",
+                            query: {
+                                id: record.id,
+                            }
+                            })
+                        );
+                    }}>修改</a>
                 </span>
             )
         }

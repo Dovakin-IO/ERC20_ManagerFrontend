@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "dva";
+import { routerRedux } from "dva/router";
 import {
   Form,
   Input,
@@ -44,6 +45,8 @@ const extra = user => (
     </Col>
   </Row>
 );
+
+
 
 const columns = [
   {
@@ -192,7 +195,19 @@ class TxUserDetail extends Component {
       form: { getFieldDecorator },
     } = this.props;
     const { isModifyAddress } = this.state;
-    const { user, list } = txuser;
+    const { user, list, logs } = txuser;
+    const log_columns = [
+      {
+        title: "操作人",
+        dataIndex: "username",
+        key: "username",
+      },
+      {
+        title: "修改时间",
+        dataIndex: "create_time",
+        key: "create_time",
+      },
+    ];
     const action = (
       <Fragment>
         {
@@ -275,13 +290,25 @@ class TxUserDetail extends Component {
             </Form>
           </Row>
         </Card>
-        <Card title="用户地址记录" className={styles.tabsCard}>
+        <Card title="用户地址记录" className={styles.tabsCard} style={{ marginBottom: 24 }}> 
           <Table
             pagination={false}
             loading={loading}
             columns={columns}
             dataSource={list}
           />
+        </Card>
+        <Card title="操作日志" className={styles.tabsCard}>
+          <Table 
+            expandedRowRender={ record => <p>{
+              record.username} 将 {record.pre_settlement_account_name}, {record.pre_real_name}, {record.pre_mobile}, {record.pre_email} 
+              修改为: {record.settlement_account_name}, {record.real_name}, {record.mobile}, {record.email}
+            </p>}
+            pagination={false}
+            loading={loading}
+            columns={log_columns}
+            dataSource={logs}
+            />
         </Card>
       </PageHeaderWrapper>
     );

@@ -1,4 +1,4 @@
-import { queryUserInfo, addContractAddress,exportVoucherPDF } from "@/services/serverapi";
+import { queryUserInfo, addContractAddress,exportVoucherPDF, queryMemberLog } from "@/services/serverapi";
 import { notification } from "antd";
 
 export default {
@@ -17,6 +17,7 @@ export default {
       transferTotal: 0
     },
     list: [],
+    logs: [],
     isAddSuccess: ""
   },
 
@@ -75,6 +76,7 @@ export default {
     save(state, { payload }) {
       return {
         ...state,
+        logs: payload.logs,
         list: payload.list,
         user: payload.user
       };

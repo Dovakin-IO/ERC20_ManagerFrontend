@@ -157,6 +157,8 @@ export default {
   'app.forms.basic.title': '基礎表單',
   'app.forms.basic.description':
     '表單頁用於向用戶收集或驗證信息，基礎表單常見於數據項較少的表單場景。',
+  'app.tx.txuseredit.title': '用户信息修改',
+  'app.tx.txuseredit.description':'',
   'app.monitor.trading-activity': '活動實時交易情況',
   'app.monitor.total-transactions': '今日交易總額',
   'app.monitor.sales-target': '銷售目標完成率',

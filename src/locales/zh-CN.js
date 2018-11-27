@@ -20,8 +20,10 @@ export default {
   'validation.goal.required': '请输入目标描述',
   'validation.standard.required': '请输入衡量标准',
   'form.optional': '（选填）',
+  'form.update': '修改',
   'form.submit': '提交',
   'form.save': '保存',
+  'form.back': '返回',
   'form.email.placeholder': '邮箱',
   'form.password.placeholder': '至少6位密码，区分大小写',
   'form.confirm-password.placeholder': '确认密码',
@@ -158,6 +160,8 @@ export default {
   'app.forms.basic.title': '基础表单',
   'app.forms.basic.description':
     '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
+  'app.tx.txuseredit.title': '用户编辑',
+  'app.tx.txuseredit.description':'如果您想修改用户钱包地址，请前往用户详情界面修改',
   'app.monitor.trading-activity': '活动实时交易情况',
   'app.monitor.total-transactions': '今日交易总额',
   'app.monitor.sales-target': '销售目标完成率',
@@ -291,6 +295,7 @@ export default {
   'menu.txuser': '基础信息',
   'menu.txuser.userdetail': '用户详情',
   'menu.txuser.userlist': '用户管理',
+  'menu.txuser.useredit': '用户编辑',
   'menu.txadmin': '平台管理',
   'menu.txadmin.addresslist': '平台地址',
 };

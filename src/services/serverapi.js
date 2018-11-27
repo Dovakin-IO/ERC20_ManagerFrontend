@@ -42,6 +42,24 @@ export async function queryUserList(params) {
     })
 }
 
+export async function queryUserEditInfo(params) {
+    return request('/api/api/user/editinfo', {
+        method: 'POST',
+        body: {
+            ...params,
+        }
+    })
+}
+
+export async function updateUserEditInfo(params) {
+    return request('/api/api/user/edit', {
+        method: 'POST',
+        body: {
+            ...params,
+        }
+    })
+}
+
 export async function addContractAddress(params) {
     return request('/api/api/address/add', {
         method: 'POST',
@@ -62,6 +80,15 @@ export async function queryCredible(params) {
 
 export async function exportVoucherPDF(params) {
     return request('/api/api/export/voucher', {
+        method: 'POST',
+        body: {
+            ...params,
+        }
+    })
+}
+
+export async function queryMemberLog(params) {
+    return request('/api/api/log/member', {
         method: 'POST',
         body: {
             ...params,
