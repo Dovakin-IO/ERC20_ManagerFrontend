@@ -18,6 +18,7 @@ export default {
     },
     list: [],
     logs: [],
+    mutiUser: [],
     isAddSuccess: ""
   },
 
@@ -78,7 +79,8 @@ export default {
         ...state,
         logs: payload.logs,
         list: payload.list,
-        user: payload.user
+        user: payload.user,
+        mutiUser: payload.mutiUser,
       };
     },
     add(state, { payload }) {

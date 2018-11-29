@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import { connect } from "dva";
 import { routerRedux } from "dva/router";
 import {
+  Alert,
+  Tag,
   Form,
   Input,
   Button,
@@ -39,9 +41,11 @@ const dateFormat = datestr => {
 
 const extra = user => (
   <Row>
-    <Col xs={24} sm={12}>
-      <div className={styles.textSecondary}>已转账次数(CPCT)</div>
-      <div className={styles.heading}>{user.transferTotal}</div>
+    <Col xs={24} sm={12} >
+      <div className={styles.textSecondary}>平台已转账次数(CPCT)</div>
+      <div className={styles.heading}>{user.transferTotal + "次"}</div>
+      <div className={styles.textSecondary}>平台已转账金额(CPCT)</div>
+      <div className={styles.heading}>{user.total}</div>
     </Col>
   </Row>
 );
@@ -96,7 +100,31 @@ const columns = [
 class TxUserDetail extends Component {
   state = {
     isModifyAddress: true,
+    isException: this.props.txuser.mutiUser? true : false,
     cpct_address: ""
+  };
+
+  fmtDate = obj => {
+    let date = new Date(obj * 1000);
+    let y = date.getFullYear();
+    let m = "0" + (date.getMonth() + 1);
+    let d = "0" + date.getDate();
+    let h = date.getHours();
+    let mm = date.getMinutes();
+    let s = date.getSeconds();
+    return (
+      y +
+      "-" +
+      m.substring(m.length - 2, m.length) +
+      "-" +
+      d.substring(d.length - 2, d.length) +
+      " " +
+      h +
+      ":" +
+      mm +
+      ":" +
+      s
+    );
   };
 
   description = user => (
@@ -105,6 +133,8 @@ class TxUserDetail extends Component {
       <Description term="手机号">{user.mobile}</Description>
       <Description term="创建时间">{dateFormat(user.create_time)}</Description>
       <Description term="订单编号">{user.order_id}</Description>
+      <Description term="邮箱">{user.order_id}</Description>
+      <Description term="地区">{user.order_id}</Description>
       <Description term="提币地址">
         <a href={'https://etherscan.io/address/' + user.cpct_address + '#tokentxns'} target="_blank">{user.cpct_address == null ? "" : user.cpct_address}</a>
         {user.cpct_address == null ? (
@@ -194,8 +224,120 @@ class TxUserDetail extends Component {
       dispatch,
       form: { getFieldDecorator },
     } = this.props;
-    const { isModifyAddress } = this.state;
-    const { user, list, logs } = txuser;
+    const { isModifyAddress, isException } = this.state;
+    const { user, list, logs, mutiUser } = txuser;
+    const mutiuser_columns = [
+      {
+        title: "用户编号",
+        dataIndex: "settlementAccountName",
+      },
+      {
+        title: "姓名",
+        dataIndex: "realName",
+      },
+      {
+        title: "手机号",
+        dataIndex: "mobile",
+      },
+      {
+        title: "地区",
+        dataIndex: "areaName",
+      },
+    ];
+    const tx_columns = [
+      {
+        title: "交易hash",
+        dataIndex: "txHash",
+        width: 350,
+        fixed: true,
+        render: (text, record) => (
+          sessionStorage.getItem("credible").indexOf(record.tokenFrom) != -1?
+          <span>
+            <a
+              href="javascript:;"
+              onClick={() => {
+                dispatch(
+                  routerRedux.push({
+                    pathname: "/tx/table-detail",
+                    query: {
+                      txHash: text
+                    }
+                  })
+                );
+              }}
+            >
+            <div>
+              <Tag color="green">平台交易</Tag>
+              {/* { record.cpctAddress === record.fromAddr? <Tag color="orange-inverse">OUT</Tag> : <Tag color="green-inverse">IN</Tag>} */}
+              {text.substring(0, 6) + "..." + text.substring(60, 66)}
+            </div>           
+            </a>
+          </span> : 
+                  <span>
+                  <a
+                    href="javascript:;"
+                    onClick={() => {
+                      dispatch(
+                        routerRedux.push({
+                          pathname: "/tx/table-detail",
+                          query: {
+                            txHash: text
+                          }
+                        })
+                      );
+                    }}
+                  >
+                  <div>
+                    <Tag color="red">非平台交易</Tag>
+                    {/* { record.cpctAddress === record.fromAddr? <Tag color="orange-inverse">OUT</Tag> : <Tag color="green-inverse">IN</Tag>} */}
+                    {text.substring(0, 6) + "..." + text.substring(60, 66)}
+                  </div>           
+                  </a>
+          </span> 
+        )
+      },
+      {
+        title: "转出地址",
+        dataIndex: "tokenFrom",
+        width: 150,
+        render: (text, record) => (
+          <span>
+            {/* <a href="javascript:;"> */}
+              {text.substring(0, 6) + "..." + text.substring(36, 42)}
+            {/* </a> */}
+          </span>
+        )
+      },
+      {
+        title: "转入地址",
+        dataIndex: "tokenTo",
+        width: 150,
+        render: (text, record) => (
+          <span>
+            {/* <a href="javascript:;"> */}
+              {text.substring(0, 6) + "..." + text.substring(36, 42)}
+            {/* </a> */}
+          </span>
+        )
+      },
+      {
+        title: "交易时间",
+        dataIndex: "timestamp",
+        width: 150,
+        render: (text, record) => {
+          return this.fmtDate(text);
+        }
+      },
+      {
+        title: "交易数量",
+        dataIndex: "value",
+        width: 200,
+        render: (text, record) => (
+          <span><strong>{text.substring(0, text.length - 18) + "." + text.substring(text.length - 18, text.length-12)}</strong></span>
+        )
+        // 11952000000000000000
+      },
+    ];
     const log_columns = [
       {
         title: "操作人",
@@ -290,8 +432,47 @@ class TxUserDetail extends Component {
             </Form>
           </Row>
         </Card>
+        {
+          mutiUser? <Alert 
+          hidden={true}
+          style={{ marginBottom: 10 }} 
+          message={
+            "该用户当前启用的地址存在多个用户共用情况，请谨慎核对转账次数与金额"
+          } 
+          type="error" 
+          showIcon
+          /> : <div></div> 
+        }
+        <Card
+          style={{ marginBottom: 24 }}
+          title="共用地址名单"
+          hidden={mutiUser? false : true}
+          >
+          <Table 
+              pagination={false}
+              loading={loading}
+              columns={mutiuser_columns}
+              dataSource={mutiUser}
+            />
+        
+        </Card>
+        <Alert style={{ marginBottom: 10 }} 
+                message={
+                  "用户地址记录中的转入个数只统计平台转入的次数"
+                } 
+                type="info" 
+                showIcon
+                />
         <Card title="用户地址记录" className={styles.tabsCard} style={{ marginBottom: 24 }}> 
           <Table
+            expandedRowRender={
+              record => <Table 
+                          pagination={false}
+                          loading={loading}
+                          columns={tx_columns}
+                          dataSource={record.transactions}
+                          />
+            }
             pagination={false}
             loading={loading}
             columns={columns}

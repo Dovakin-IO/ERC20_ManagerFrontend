@@ -37,11 +37,14 @@ class TxDetail extends PureComponent {
   render() {
     const {
       txdetail: { userInfo, txInfo },
-      dispatch
+      dispatch,
+      loading,
     } = this.props;
     return (
       <PageHeaderWrapper title="转账详情">
-        <Card bordered={false}>
+        <Card 
+              loading={loading}
+              bordered={false}>
           <DescriptionList
             size="large"
             title="操作用户信息"
