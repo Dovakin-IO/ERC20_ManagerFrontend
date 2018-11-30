@@ -43,7 +43,7 @@ const extra = user => (
   <Row>
     <Col xs={24} sm={12} >
       <div className={styles.textSecondary}>平台已转账次数(CPCT)</div>
-      <div className={styles.heading}>{user.transferTotal + "次"}</div>
+      <div className={styles.heading}>{user.transferTotal}</div>
       <div className={styles.textSecondary}>平台已转账金额(CPCT)</div>
       <div className={styles.heading}>{user.total}</div>
     </Col>
@@ -58,7 +58,7 @@ const columns = [
     dataIndex: "cpct_address",
     key: "cpct_address",
     render: (text, record) => (
-      <a href={'https://etherscan.io/address/' + text + '#tokentxns' } target="_blank">{text}</a>
+      <code><a href={'https://etherscan.io/address/' + text + '#tokentxns' } target="_blank">{text}</a></code>
     )
   },
   {
@@ -303,7 +303,7 @@ class TxUserDetail extends Component {
         render: (text, record) => (
           <span>
             {/* <a href="javascript:;"> */}
-              {text.substring(0, 6) + "..." + text.substring(36, 42)}
+            <a href={'https://etherscan.io/address/' + text + '#tokentxns'} target="_blank">{text.substring(0, 6) + "..." + text.substring(36, 42)}</a>
             {/* </a> */}
           </span>
         )
@@ -315,7 +315,7 @@ class TxUserDetail extends Component {
         render: (text, record) => (
           <span>
             {/* <a href="javascript:;"> */}
-              {text.substring(0, 6) + "..." + text.substring(36, 42)}
+            <a href={'https://etherscan.io/address/' + text + '#tokentxns'} target="_blank">{text.substring(0, 6) + "..." + text.substring(36, 42)}</a>
             {/* </a> */}
           </span>
         )
@@ -354,7 +354,8 @@ class TxUserDetail extends Component {
       <Fragment>
         {
           // user.cpct_address == null?
-          <Button type="primary" disabled >导出电子凭证</Button> 
+          <Button type="primary" disabled >导出电子凭证</Button>
+      // <Button type="primary" disabled={sessionStorage.getItem("role") === 'admin' || sessionStorage.getItem("role") === 'dev'? false : true} >导出电子凭证</Button> 
           // : <Button type="primary" onClick={() => {
           //   dispatch({
           //     type: 'txuser/export',
@@ -458,7 +459,7 @@ class TxUserDetail extends Component {
         </Card>
         <Alert style={{ marginBottom: 10 }} 
                 message={
-                  "用户地址记录中的转入个数只统计平台转入的次数"
+                  "用户地址记录中的转入次数只统计平台转入的次数"
                 } 
                 type="info" 
                 showIcon

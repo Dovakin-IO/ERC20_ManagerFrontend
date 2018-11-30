@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import {
+  Avatar,
   Row,
   Col,
   Icon,
@@ -48,6 +49,7 @@ import { getTimeDistance } from '@/utils/utils';
 import styles from './Analysis.less';
 import Websocket from 'react-websocket';
 import DataSet from "@antv/data-set";
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
@@ -84,6 +86,11 @@ class Analysis extends Component {
     test: '',
     currentBlock: undefined,
     checkedBlockHeight: undefined,
+    header: {
+      transferValue: '',
+      transferCount: '',
+      gasused: '',
+    },
     analysisData: [
       {
         "平台转入": 0,
@@ -168,6 +175,7 @@ class Analysis extends Component {
     this.setState({
       currentBlock: result.currentBlockHeight,
       checkedBlockHeight: result.checkedBlockHeight,
+      header: result.header,
       analysisData: result.dataAnalyses? result.dataAnalyses : this.state.analysisData,
       transactionData: result.analyses? result.analyses : this.state.transactionData,
     });
@@ -213,7 +221,7 @@ class Analysis extends Component {
   render() {
     const { DataView } = DataSet;
     const { rangePickerValue, salesType, loading: propsLoding, currentTabKey, 
-      test, currentBlock, checkedBlockHeight, analysisData, transactionData } = this.state;
+      test, currentBlock, checkedBlockHeight, header, analysisData, transactionData } = this.state;
     const { chart, loading: stateLoading } = this.props;
     const {
       visitData,
@@ -492,145 +500,185 @@ class Analysis extends Component {
       style: { marginBottom: 24 },
     };
 
-    return (
-      <GridContent>
-        <Row gutter={24}>
-        <div>
-            <Websocket 
-              url='ws://47.244.9.96/ws/monitor'
-              // url='ws://127.0.0.1:8080/monitor'
-              onMessage={this.handleData.bind(this)}/>
+    const pageHeaderContent =
+    (
+      <div className={styles.pageHeaderContent}>
+        <div className={styles.avatar}>
+          {/* <Avatar size="large" src={currentUser.avatar} /> */}
         </div>
-          <Col {...topColResponsiveProps}>
-            <ChartCard
-              bordered={false}
-              loading={loading}
-              title={<FormattedMessage id="app.analysis.payments" defaultMessage="Payments" />}
-              action={
-                <Tooltip
-                  title={
-                    <FormattedMessage id="app.analysis.blocksync" defaultMessage="Introduce" />
-                  }
-                >
-                  <Icon type="info-circle-o" />
-                </Tooltip>
-              }
-            
-              total={
-                currentBlock ?
-                numeral(currentBlock).format('0,0')
-                : "正在获取"
-              }
-              footer={
-                <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
-                </div>
-              }
-              contentHeight={46}
-            >
-              <MiniProgress percent={78} strokeWidth={8} target={80} color="#f50" />
-            </ChartCard>
-          </Col>
-          <Col {...topColResponsiveProps}>
-            <ChartCard
-              loading={loading}
-              bordered={false}
-              title={
-                <FormattedMessage
-                  id="app.analysis.operational-effect"
-                  defaultMessage="Operational Effect"
-                />
-              }
-              action={
-                <Tooltip
-                  title={
-                    <FormattedMessage id="app.analysis.blockcheck" defaultMessage="introduce" />
-                  }
-                >
-                  <Icon type="info-circle-o" />
-                </Tooltip>
-              }
-              total={
-                checkedBlockHeight ?
-                numeral(checkedBlockHeight).format('0,0')
-                : "正在获取"
-              }
-              footer={
-                <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
-                </div>
-              }
-              contentHeight={46}
-            >
-              <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
-            </ChartCard>
-          </Col>
-        </Row>
+        <div className={styles.content}>
+          <div className={styles.contentTitle}>
+            {/* 早安，
+            ，祝你开心每一天！ */}
+          </div>
+        </div>
+      </div>
+    );
 
-        <Row gutter={24}>      
-            <Col span={12}>
-              <Card
-                >
-                <Chart height={400} data={transactionData} scale={cols} forceFit>
-                  <Axis name="block" />
-                  <Axis name="交易记录数量" />
-                  <Tip
-                    crosshairs={{
-                      type: "y"
-                    }}
-                  />
-                  <Geom type="line" position="block*交易记录数量" size={2} />
-                  <Geom
-                    type="point"
-                    position="block*交易记录数量"
-                    size={5}
-                    shape={"circle"}
-                    style={{
-                      stroke: "#fff",
-                      lineWidth: 1
-                    }}
-                  />
-                </Chart>
-              </Card>
-            </Col>
+    const extraContent = (
+      <div className={styles.extraContent}>
+        <div className={styles.statItem}>
+          <p>已转账金额(CPCT)</p>
+          <p>{header.transferValue}</p>
+        </div>
+        <div className={styles.statItem}>
+          <p>转账进度（次）</p>
+          <p>
+            {header.transferCount}<span> / 100</span>
+          </p>
+        </div>
+        <div className={styles.statItem}>
+          <p>总矿工费消耗（ETH）</p>
+          <p>{header.gasused}</p>
+        </div>
+      </div>
+    );
 
-            <Col span={12}>
-              <Card
-                loading={false}
-                >
-                <Chart 
-                  // height={window.innerHeight} 
-                  height={400}
-                  data={dv} 
-                  forceFit>
-                  <Axis name="type" title={null} labelOffset={10} />
-                  <Axis
-                    name="value"
-                    title={null}
-                    tickLine={null}
-                    position="right"
-                    formatter={function(val) {
-                      return val + "%";
-                    }}
-                  />
-                  <Coord transpose />
-                  <Tip />
-                  <Legend />
-                  <Geom
-                    type="intervalStack"
-                    position="type*value"
-                    color={[
-                      "opinion",
-                      function(opinion) {
-                        return colorMap[opinion];
-                      }
-                    ]}
-                    shape="smooth"
-                    opacity={0.8}
-                  />
-                </Chart>
-              </Card>  
+    return (
+      <PageHeaderWrapper
+        loading={loading}
+        content={pageHeaderContent}
+        extraContent={extraContent}
+        >
+        <GridContent>
+          <Row gutter={24}>
+          <div>
+              <Websocket 
+                url='ws://47.244.9.96/ws/monitor'
+                // url='ws://127.0.0.1:8080/monitor'
+                onMessage={this.handleData.bind(this)}/>
+          </div>
+            <Col {...topColResponsiveProps}>
+              <ChartCard
+                bordered={false}
+                loading={loading}
+                title={<FormattedMessage id="app.analysis.payments" defaultMessage="Payments" />}
+                action={
+                  <Tooltip
+                    title={
+                      <FormattedMessage id="app.analysis.blocksync" defaultMessage="Introduce" />
+                    }
+                  >
+                    <Icon type="info-circle-o" />
+                  </Tooltip>
+                }
+              
+                total={
+                  currentBlock ?
+                  numeral(currentBlock).format('0,0')
+                  : "正在获取"
+                }
+                footer={
+                  <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                  </div>
+                }
+                contentHeight={46}
+              >
+                <MiniProgress percent={78} strokeWidth={8} target={80} color="#f50" />
+              </ChartCard>
             </Col>
-        </Row>
-      </GridContent>
+            <Col {...topColResponsiveProps}>
+              <ChartCard
+                loading={loading}
+                bordered={false}
+                title={
+                  <FormattedMessage
+                    id="app.analysis.operational-effect"
+                    defaultMessage="Operational Effect"
+                  />
+                }
+                action={
+                  <Tooltip
+                    title={
+                      <FormattedMessage id="app.analysis.blockcheck" defaultMessage="introduce" />
+                    }
+                  >
+                    <Icon type="info-circle-o" />
+                  </Tooltip>
+                }
+                total={
+                  checkedBlockHeight ?
+                  numeral(checkedBlockHeight).format('0,0')
+                  : "正在获取"
+                }
+                footer={
+                  <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                  </div>
+                }
+                contentHeight={46}
+              >
+                <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
+              </ChartCard>
+            </Col>
+          </Row>
+
+          <Row gutter={24}>      
+              <Col span={12}>
+                <Card
+                  >
+                  <Chart height={400} data={transactionData} scale={cols} forceFit>
+                    <Axis name="block" />
+                    <Axis name="交易记录数量" />
+                    <Tip
+                      crosshairs={{
+                        type: "y"
+                      }}
+                    />
+                    <Geom type="line" position="block*交易记录数量" size={2} />
+                    <Geom
+                      type="point"
+                      position="block*交易记录数量"
+                      size={5}
+                      shape={"circle"}
+                      style={{
+                        stroke: "#fff",
+                        lineWidth: 1
+                      }}
+                    />
+                  </Chart>
+                </Card>
+              </Col>
+
+              <Col span={12}>
+                <Card
+                  loading={false}
+                  >
+                  <Chart 
+                    // height={window.innerHeight} 
+                    height={400}
+                    data={dv} 
+                    forceFit>
+                    <Axis name="type" title={null} labelOffset={10} />
+                    <Axis
+                      name="value"
+                      title={null}
+                      tickLine={null}
+                      position="right"
+                      formatter={function(val) {
+                        return val + "%";
+                      }}
+                    />
+                    <Coord transpose />
+                    <Tip />
+                    <Legend />
+                    <Geom
+                      type="intervalStack"
+                      position="type*value"
+                      color={[
+                        "opinion",
+                        function(opinion) {
+                          return colorMap[opinion];
+                        }
+                      ]}
+                      shape="smooth"
+                      opacity={0.8}
+                    />
+                  </Chart>
+                </Card>  
+              </Col>
+          </Row>
+        </GridContent>
+      </PageHeaderWrapper>
     );
   }
 }

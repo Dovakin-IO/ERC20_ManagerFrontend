@@ -79,7 +79,7 @@ class TxDetail extends PureComponent {
           <Divider style={{ marginBottom: 32 }} />
           <Timeline>
             <Timeline.Item color="green">
-              交易哈希: <a href={'https://etherscan.io/tx/' + txInfo.txHash}>{txInfo.txHash}</a>
+              交易哈希: <a href={'https://etherscan.io/tx/' + txInfo.txHash} target="_blank">{txInfo.txHash}</a>
             </Timeline.Item>
             <Timeline.Item color="green">
               区块高度: {txInfo.blockHeight}

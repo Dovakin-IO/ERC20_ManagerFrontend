@@ -129,7 +129,8 @@ class TxSearchList extends PureComponent {
       render: (text, record) => (
         <span>
           {/* <a href="javascript:;"> */}
-            {text.substring(0, 6) + "..." + text.substring(36, 42)}
+          <a href={'https://etherscan.io/address/' + text + '#tokentxns'} target="_blank">{text.substring(0, 6) + "..." + text.substring(36, 42)}</a>
+            
           {/* </a> */}
         </span>
       )
@@ -141,7 +142,8 @@ class TxSearchList extends PureComponent {
       render: (text, record) => (
         <span>
           {/* <a href="javascript:;"> */}
-            {text.substring(0, 6) + "..." + text.substring(36, 42)}
+          <a href={'https://etherscan.io/address/' + text + '#tokentxns'} target="_blank">{text.substring(0, 6) + "..." + text.substring(36, 42)}</a>
+            
           {/* </a> */}
         </span>
       )

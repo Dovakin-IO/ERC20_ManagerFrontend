@@ -232,7 +232,7 @@ class TxAddressList extends PureComponent {
                                         <List.Item.Meta
                                             avatar={<Avatar src={cpctIcon} shape="square" size="large" />}
                                             title={<a href={item.href}>{item.title}</a>}
-                                            description={item.address}
+                                            description={<code>{item.address}</code>}
                                         />
                                         <ListContent data={item} />
                                     </List.Item>
