@@ -58,6 +58,7 @@
     "react-websocket": "^2.0.0"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.0",
     "@types/react": "^16.4.16",
     "@types/react-dom": "^16.0.9",
     "antd-pro-merge-less": "^0.0.9",

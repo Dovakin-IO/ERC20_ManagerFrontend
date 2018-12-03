@@ -472,6 +472,7 @@ class TxUserDetail extends Component {
                           loading={loading}
                           columns={tx_columns}
                           dataSource={record.transactions}
+                          scroll={{ x: 1000 }}
                           />
             }
             pagination={false}

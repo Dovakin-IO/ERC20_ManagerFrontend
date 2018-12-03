@@ -32,7 +32,7 @@ let routes = [
         "exact": true
       },
       {
-        "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+        "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
       }
     ]
   },
@@ -83,7 +83,7 @@ let routes = [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -129,7 +129,7 @@ let routes = [
                 "exact": true
               },
               {
-                "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+                "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
               }
             ]
           },
@@ -143,7 +143,7 @@ let routes = [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -172,7 +172,7 @@ let routes = [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -207,7 +207,7 @@ let routes = [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -228,7 +228,41 @@ let routes = [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "path": "/txadmin/export-step-form",
+            "name": "exportstepform",
+            "component": dynamic({ loader: () => import('../TxAdmin/ExportStepForm'), loading: require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/components/PageLoading/index').default }),
+            "hideChildrenInMenu": true,
+            "routes": [
+              {
+                "path": "/txadmin/export-step-form",
+                "redirect": "/txadmin/export-step-form/info",
+                "exact": true
+              },
+              {
+                "path": "/txadmin/export-step-form/info",
+                "name": "info",
+                "component": dynamic({ loader: () => import('../TxAdmin/ExportStepForm/Step1'), loading: require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/components/PageLoading/index').default }),
+                "exact": true
+              },
+              {
+                "path": "/txadmin/export-step-form/confirm",
+                "name": "confirm",
+                "component": dynamic({ loader: () => import('../TxAdmin/ExportStepForm/Step2'), loading: require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/components/PageLoading/index').default }),
+                "exact": true
+              },
+              {
+                "path": "/txadmin/export-step-form/result",
+                "name": "result",
+                "component": dynamic({ loader: () => import('../TxAdmin/ExportStepForm/Step3'), loading: require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/components/PageLoading/index').default }),
+                "exact": true
+              },
+              {
+                "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+              }
+            ]
+          },
+          {
+            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -285,12 +319,12 @@ let routes = [
                 "exact": true
               },
               {
-                "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+                "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
               }
             ]
           },
           {
-            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -316,7 +350,7 @@ let routes = [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -339,7 +373,7 @@ let routes = [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -375,7 +409,7 @@ let routes = [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -411,7 +445,7 @@ let routes = [
                 "exact": true
               },
               {
-                "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+                "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
               }
             ]
           },
@@ -446,12 +480,12 @@ let routes = [
                 "exact": true
               },
               {
-                "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+                "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
               }
             ]
           },
           {
-            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -460,12 +494,12 @@ let routes = [
         "exact": true
       },
       {
-        "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+        "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
       }
     ]
   },
   {
-    "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+    "component": () => React.createElement(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/node_modules/_umi-build-dev@1.2.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
   }
 ];
 window.g_plugins.applyForEach('patchRoutes', { initialValue: routes });

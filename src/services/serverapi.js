@@ -87,6 +87,15 @@ export async function exportVoucherPDF(params) {
     })
 }
 
+export async function exportMember(params) {
+    return request('/api/api/export/member', {
+        method: 'POST',
+        body: {
+            ...params,
+        }
+    })
+}
+
 export async function queryMemberLog(params) {
     return request('/api/api/log/member', {
         method: 'POST',

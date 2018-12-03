@@ -1,4 +1,4 @@
-import { queryCredible } from '@/services/serverapi';
+import { queryCredible, exportMember } from '@/services/serverapi';
 
 export default {
     namespace: 'txaddresslist',
@@ -33,6 +33,32 @@ export default {
                 type: 'save',
                 payload: response,
             })
+        },
+        *exportMember({ payload }, { call, put } ) {
+            const response = yield call(exportMember, payload);
+            // response.blob().then(blob => {
+            //     const aLink = document.createElement('a');
+            //     document.body.appendChild(aLink);
+            //     aLink.style.display='none';
+            //     const objectUrl = window.URL.createObjectURL(blob);
+            //     aLink.href = objectUrl;
+            //     aLink.download = fileName;
+            //     aLink.click();
+            //     document.body.removeChild(aLink);
+            // });
+        
+        
+            // if(response) {
+            //     yield put({
+            //         type: 'save',
+            //         payload: response,
+            //     })
+            // } else {
+            //     yield put({
+            //         type: 'save',
+            //         payload: response,
+            //     })
+            // }
         }
     },
 

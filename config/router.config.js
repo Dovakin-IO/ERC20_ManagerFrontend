@@ -137,7 +137,7 @@ export default [
           }
         ]
       },
-      // TxUser
+      // TxAdmin
       {
         path: "/txadmin",
         icon: "profile",
@@ -148,7 +148,34 @@ export default [
             path: "/txadmin/address_list",
             name: "addresslist",
             component: "./TxAdmin/TxAddressList"
-          }
+          },
+          {
+            path: "/txadmin/export-step-form",
+            name: "exportstepform",
+            component: "./TxAdmin/ExportStepForm",
+            hideChildrenInMenu: true,
+            routes: [
+              {
+                path: "/txadmin/export-step-form",
+                redirect: "/txadmin/export-step-form/info"
+              },
+              {
+                path: "/txadmin/export-step-form/info",
+                name: "info",
+                component: "./TxAdmin/ExportStepForm/Step1"
+              },
+              {
+                path: "/txadmin/export-step-form/confirm",
+                name: "confirm",
+                component: "./TxAdmin/ExportStepForm/Step2"
+              },
+              {
+                path: "/txadmin/export-step-form/result",
+                name: "result",
+                component: "./TxAdmin/ExportStepForm/Step3"
+              }
+            ]
+          },
         ]
       },
       // list

@@ -26,6 +26,8 @@ import Result from '@/components/Result';
 import cpctIcon from '../../assets/cpct_icon.png';
 import numeral from 'numeral';
 import styles from './TxAddressList.less';
+import { exportXls } from '@/utils/helper';
+import { stringify } from 'qs';
 
 const FormItem = Form.Item;
 const RadioButton = Radio.Button;
@@ -84,7 +86,7 @@ class TxAddressList extends PureComponent {
           visible: false,
         });
     };
-
+    // exportMember
     handleSubmit = e => {
         e.preventDefault();
         const { dispatch, form } = this.props;
@@ -96,10 +98,27 @@ class TxAddressList extends PureComponent {
           this.setState({
             done: true,
           });
+
+          exportXls(`/api/api/export/member?`+stringify({search:"1,2,3"}), 'name.xlsx');
+
         //   dispatch({
-        //     type: 'list/submit',
-        //     payload: { id, ...fieldsValue },
+        //     type: 'txaddresslist/exportMember',
+        //     payload: {}
         //   });
+        // var divElement= document.getElementById("downloadDiv");
+        // var downloadUrl=`${apiBasePath}/api/xxxxx/downloadDetailData`;
+        // var params=JSON.stringify({
+        //     key:'value'
+        // })
+        // ReactDOM.render(
+        //     <form action={downloadUrl} method="post">
+        //         <input name="params" type="text" value={params}/> 
+        //     </form>,
+        //     divElement
+        // )
+        // ReactDOM.findDOMNode(divElement).querySelector('form').submit();
+        // ReactDOM.unmountComponentAtNode(divElement);
+
         });
     };
 

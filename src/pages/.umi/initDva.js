@@ -31,6 +31,7 @@ app.model({ namespace: 'txuser', ...(require('/Users/dovakin/Documents/github/ER
 app.model({ namespace: 'txuseredit', ...(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/pages/TxUser/models/txuseredit.js').default) });
 app.model({ namespace: 'txuserlist', ...(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/pages/TxUser/models/txuserlist.js').default) });
 app.model({ namespace: 'txaddresslist', ...(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/pages/TxAdmin/models/txaddresslist.js').default) });
+app.model({ namespace: 'txexport', ...(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/pages/TxAdmin/models/txexport.js').default) });
 app.model({ namespace: 'rule', ...(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/pages/List/models/rule.js').default) });
 app.model({ namespace: 'profile', ...(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/pages/Profile/models/profile.js').default) });
 app.model({ namespace: 'error', ...(require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/pages/Exception/models/error.js').default) });
