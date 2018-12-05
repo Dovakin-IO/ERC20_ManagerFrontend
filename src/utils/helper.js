@@ -1,9 +1,10 @@
-import { Select, Modal, Spin, message } from 'antd';
+import { Select, Modal, Spin, message, Progress } from 'antd';
  const FileSaver = require('file-saver');
 
  export function exportXls(address, filename) {
      let request = new XMLHttpRequest();
      let waitingModal;
+     let percent = 0;
      request.open("GET", address, true);
      request.setRequestHeader('Access-Control-Allow-Origin', '*');
      request.setRequestHeader('Authkey', sessionStorage.getItem("auth"));
@@ -12,6 +13,12 @@ import { Select, Modal, Spin, message } from 'antd';
          FileSaver.saveAs(e.target.response, filename);
          setTimeout(() => waitingModal.destroy(), 400);
      };
+     request.addEventListener("progress", function(evt) {
+        if (evt.lengthComputable) {
+            let percentComplete = evt.loaded / evt.total;
+            // waitingModal.content.Progress.percent = percentComplete * 100
+        }
+     }, false);
      request.send();
      waitingModal = Modal.info({
          maskClosable: false,
@@ -28,6 +35,7 @@ import { Select, Modal, Spin, message } from 'antd';
                         <p width={294}></p>
                      </Spin>
                  </div>
+                 <Progress percent={percent} />
                  <div style={{position:'absolute',zIndex:99999,bottom:'29px',right:'39px',background:'white',width:'86px',height:'40px'}}>导出中...</div>
              </div>
          ),
