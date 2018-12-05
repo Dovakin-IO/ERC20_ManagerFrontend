@@ -31,13 +31,15 @@ export default class GlobalHeader extends PureComponent {
             <img src={logo} alt="logo" width="32" />
           </Link>
         )}
-        {/* <Icon
+        <Icon
           className={styles.trigger}
           type={collapsed ? 'menu-unfold' : 'menu-fold'}
           onClick={this.toggle}
-        /> */}
-        <div className={styles.left}>
-           欢迎进入生态基金系统
+        />
+        <div 
+        className={styles.left}
+        >
+          欢迎进入<font face="verdana" color="#e54900">CPCT生态基金管理系统 v1.0</font>
         </div>
         <RightContent {...this.props} />
       </div>

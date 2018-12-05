@@ -133,8 +133,8 @@ class TxUserDetail extends Component {
       <Description term="手机号">{user.mobile}</Description>
       <Description term="创建时间">{dateFormat(user.create_time)}</Description>
       <Description term="订单编号">{user.order_id}</Description>
-      <Description term="邮箱">{user.order_id}</Description>
-      <Description term="地区">{user.order_id}</Description>
+      <Description term="邮箱">{user.email}</Description>
+      <Description term="地区">{user.areaName}</Description>
       <Description term="提币地址">
         <a href={'https://etherscan.io/address/' + user.cpct_address + '#tokentxns'} target="_blank">{user.cpct_address == null ? "" : user.cpct_address}</a>
         {user.cpct_address == null ? (
@@ -435,6 +435,7 @@ class TxUserDetail extends Component {
         </Card>
         {
           mutiUser? <Alert 
+          closable
           hidden={true}
           style={{ marginBottom: 10 }} 
           message={
@@ -458,6 +459,7 @@ class TxUserDetail extends Component {
         
         </Card>
         <Alert style={{ marginBottom: 10 }} 
+                closable
                 message={
                   "用户地址记录中的转入次数只统计平台转入的次数"
                 } 
