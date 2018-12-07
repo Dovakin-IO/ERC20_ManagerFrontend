@@ -21,6 +21,17 @@ class TxUserList extends PureComponent {
         formValues: {}
     };
 
+    componentWillMount() {
+        this.props.dispatch({
+            type: "txuserlist/fetch",
+            payload: {
+              current: 1,
+              pageSize: 20,
+              withdraw_task_id: sessionStorage.getItem('task_id'), 
+            }
+        });
+    }
+
     columns = [
         {
             title: "客户编号",

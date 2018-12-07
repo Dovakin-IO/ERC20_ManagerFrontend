@@ -52,6 +52,14 @@ class TxUserEdit extends PureComponent {
                 
               },
             });
+            dispatch(
+                routerRedux.push({
+                    pathname: "/txuser/user_list",
+                    query: {
+                    //   settlement_account_name: values.settlementAccountName,
+                    }
+                })
+            )
           }
         });
     };
