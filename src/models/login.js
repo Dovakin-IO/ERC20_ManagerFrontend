@@ -28,6 +28,7 @@ export default {
         sessionStorage.setItem("role", response.currentAuthority);
         sessionStorage.setItem("currentUserName", response.userName);
         sessionStorage.setItem("credible", "0x5db605165d2e2212803c850b403030a021d045ef,0xfe28c0e4645d1fab1490b277f1d0f9d5cc0c2ec4,0x3d4c4c0b97d46405efdac826984df97c66b40070,0x33cba7065f61e8f66b98e83562a3a3998e31be97,0xf2f6a79253a46624b51459af383d806ab26633ea,0x84295d5e054d8cff5a22428b195f5a1615bd644f,0x0e95f8f8ecbd770585766c1cd216c81aa43439a6");
+        sessionStorage.setItem("transferCount", response.transferCount);
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;

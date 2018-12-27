@@ -297,6 +297,7 @@ export default {
   'menu.txuser.userlist': '用户管理',
   'menu.txuser.useredit': '用户编辑',
   'menu.txadmin': '平台管理',
+  'menu.txadmin.exceptiontx': '异常用户统计',
   'menu.txadmin.addresslist': '平台地址',
   'menu.txadmin.exportstepform': '用户数据导出',
   'menu.txadmin.exportstepform.info': '选择地区',

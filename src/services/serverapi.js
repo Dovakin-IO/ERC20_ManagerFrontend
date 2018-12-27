@@ -104,3 +104,12 @@ export async function queryMemberLog(params) {
         }
     })
 }
+
+export async function queryExceptionTx(params) {
+    return request('/api/api/tx/exception', {
+        method: 'POST',
+        body: {
+            ...params,
+        }
+    })
+}

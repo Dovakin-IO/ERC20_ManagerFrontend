@@ -215,21 +215,38 @@ let routes = [
         "path": "/txadmin",
         "icon": "profile",
         "name": "txadmin",
-        "authority": [
-          "admin",
-          "dev",
-          "onlysearch"
-        ],
         "routes": [
+          {
+            "path": "/txadmin/exception_tx",
+            "name": "exceptiontx",
+            "authority": [
+              "admin",
+              "dev",
+              "onlysearch",
+              "user"
+            ],
+            "component": dynamic({ loader: () => import('../TxAdmin/TxExceptionTransaction'), loading: require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/components/PageLoading/index').default }),
+            "exact": true
+          },
           {
             "path": "/txadmin/address_list",
             "name": "addresslist",
+            "authority": [
+              "admin",
+              "dev",
+              "onlysearch"
+            ],
             "component": dynamic({ loader: () => import('../TxAdmin/TxAddressList'), loading: require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
             "path": "/txadmin/export-step-form",
             "name": "exportstepform",
+            "authority": [
+              "admin",
+              "dev",
+              "onlysearch"
+            ],
             "component": dynamic({ loader: () => import('../TxAdmin/ExportStepForm'), loading: require('/Users/dovakin/Documents/github/ERC20_ManagerFrontend/src/components/PageLoading/index').default }),
             "hideChildrenInMenu": true,
             "routes": [

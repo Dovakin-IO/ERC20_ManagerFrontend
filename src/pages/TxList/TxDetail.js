@@ -91,10 +91,16 @@ class TxDetail extends PureComponent {
               )}
             </Timeline.Item>
             <Timeline.Item color="green">
-              转出地址: {txInfo.token_from}
+            转出地址: {sessionStorage.getItem("credible").indexOf(txInfo.token_from) != -1? 
+              <font color="#e54900">{txInfo.token_from}</font>
+              : 
+              txInfo.token_from}         
             </Timeline.Item>
             <Timeline.Item color="green">
-              转入地址: {txInfo.token_to}
+            转入地址: {sessionStorage.getItem("credible").indexOf(txInfo.token_to) != -1? 
+              <font color="#e54900">{txInfo.token_to}</font>
+              : 
+              txInfo.token_to}        
             </Timeline.Item>
             <Timeline.Item color="green">
               交易数量: {txInfo.value.substring(0, txInfo.value.length - 18) + "." + txInfo.value.substring(txInfo.value.length - 18, txInfo.value.length - 12)}

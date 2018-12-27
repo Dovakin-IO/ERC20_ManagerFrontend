@@ -142,16 +142,24 @@ export default [
         path: "/txadmin",
         icon: "profile",
         name: "txadmin",
-        authority: ['admin','dev','onlysearch'],
+        
         routes: [
+          {
+            path: "/txadmin/exception_tx",
+            name: "exceptiontx",
+            authority: ['admin','dev','onlysearch','user'],
+            component: "./TxAdmin/TxExceptionTransaction"
+          },
           {
             path: "/txadmin/address_list",
             name: "addresslist",
+            authority: ['admin','dev','onlysearch'],
             component: "./TxAdmin/TxAddressList"
           },
           {
             path: "/txadmin/export-step-form",
             name: "exportstepform",
+            authority: ['admin','dev','onlysearch'],
             component: "./TxAdmin/ExportStepForm",
             hideChildrenInMenu: true,
             routes: [
